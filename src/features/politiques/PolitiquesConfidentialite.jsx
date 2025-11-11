@@ -1,99 +1,159 @@
+// PolitiquesConfidentialite.jsx
 import React from "react";
 import { Box, Typography, Paper } from "@mui/material";
+import { motion } from "framer-motion";
+
+const palette = {
+  olive: "#4B6043",
+  lightOlive: "#6F8C63",
+  stone: "#F4F5F3",
+  text: "#1F1F1F",
+};
 
 export const PolitiquesConfidentialite = () => {
-  const politiqueSections = [
+  const sections = [
     {
       title: "📥 Collecte des données",
-      content: `PERFECT TRANSPORT collecte uniquement les données nécessaires à la gestion de son activité, notamment pour :
-- La gestion commerciale et logistique de nos prestations (transport, déménagement, livraison, location de véhicules)
-- L’émission et le suivi des devis et factures
-- La communication avec nos clients et prospects, avec leur consentement explicite
-- La gestion administrative et comptable
+      content: `Chez FINI PRO, nous collectons uniquement les informations nécessaires à la bonne exécution de nos services : 
+- Données d'identité (nom, prénom)
+- Coordonnées (email, téléphone, adresse)
+- Informations liées à vos demandes de devis, chantiers ou interventions
 
-Nous ne collectons aucune donnée inutile ou disproportionnée par rapport à nos besoins.`
+Ces données sont recueillies directement auprès de vous, avec votre consentement explicite, dans le cadre de nos prestations de rénovation et de finition.`,
     },
     {
       title: "🎯 Finalités du traitement",
-      content: `Les données recueillies sont utilisées dans le strict cadre de nos missions, à savoir :
-- Gérer les demandes de devis, réservations et prestations
-- Assurer le suivi administratif, contractuel et financier
-- Communiquer avec nos clients (emails, rappels, informations de service, actualités), uniquement avec leur accord
+      content: `Les données collectées sont utilisées pour :
+- Établir et suivre vos devis, commandes et factures
+- Planifier et assurer le suivi de nos interventions
+- Répondre à vos demandes et questions
+- Vous informer, avec votre accord, de nos actualités et offres
 
-Aucune donnée n’est utilisée à d’autres fins sans votre consentement explicite.`
+Nous n’utilisons jamais vos données à des fins publicitaires sans votre consentement.`,
     },
     {
       title: "🗄️ Durée de conservation",
-      content: `Les données personnelles sont conservées uniquement le temps nécessaire à la réalisation des finalités mentionnées ci-dessus, puis archivées ou supprimées conformément à la réglementation en vigueur.
-
-Les durées de conservation peuvent varier selon la nature du traitement (ex. : obligations comptables ou légales).`
+      content: `Vos données sont conservées uniquement le temps nécessaire à la gestion de la relation client :
+- 3 ans après la fin de la relation commerciale pour les prospects ou clients inactifs
+- 10 ans pour les documents comptables (factures, chantiers validés)
+Passé ces délais, vos données sont supprimées ou archivées en toute sécurité.`,
     },
     {
-      title: "👤 Droits des personnes",
-      content: `Conformément au RGPD, chaque utilisateur dispose des droits suivants :
-- Droit d’accès à ses données
-- Droit de rectification en cas d’erreur
-- Droit à l’effacement (“droit à l’oubli”)
-- Droit d’opposition à certains traitements
-- Droit à la limitation du traitement de ses données
-- Droit à la portabilité, lorsque cela est applicable
+      title: "👤 Vos droits",
+      content: `Conformément au RGPD, vous pouvez à tout moment exercer vos droits :
+- Droit d’accès et de rectification de vos données
+- Droit à l’effacement (« droit à l’oubli »)
+- Droit d’opposition au traitement
+- Droit à la limitation ou à la portabilité des données
 
-Ces droits peuvent être exercés à tout moment en écrivant à :
-📧 ${process.env.REACT_APP_BASE_MAIL}
-📮 PERFECT TRANSPORT – 3 Rue Joseph Barra, 95100 Argenteuil, France`
+Pour exercer vos droits, contactez-nous à :
+📧 ${process.env.REACT_APP_EMAIL || "contact@finipro.fr"}`,
     },
     {
       title: "🔐 Sécurité des données",
-      content: `PERFECT TRANSPORT met en œuvre toutes les mesures techniques et organisationnelles appropriées pour garantir la sécurité et la confidentialité des données personnelles, afin de les protéger contre :
-- L’accès non autorisé
-- La perte ou l’altération
-- La destruction ou la divulgation non autorisée
-
-L’accès aux données est strictement limité aux collaborateurs et partenaires habilités, dans le cadre de leurs missions et soumis à une obligation de confidentialité.`
+      content: `FINI PRO met en œuvre des mesures techniques et organisationnelles strictes afin de garantir la protection de vos informations personnelles :
+- Accès restreint aux seules personnes habilitées
+- Hébergement sécurisé des données
+- Sauvegardes régulières et chiffrées
+- Aucune diffusion non autorisée ou vente de données`,
     },
     {
-      title: "⚠️ Informations importantes",
-      content: `Aucune donnée n’est vendue ni transmise à des tiers sans consentement préalable, sauf obligation légale ou judiciaire.
-
-En cas de violation de données, PERFECT TRANSPORT notifiera les autorités compétentes et les personnes concernées conformément à la réglementation.`
+      title: "⚠️ Transmission à des tiers",
+      content: `Vos données peuvent être partagées uniquement avec nos prestataires techniques ou administratifs lorsque cela est nécessaire (hébergement, comptabilité, maintenance).
+Aucune donnée n’est transmise à des tiers à des fins commerciales.`,
     },
     {
       title: "📩 Contact",
-      content: `Pour toute question relative à la protection de vos données personnelles, vous pouvez contacter notre service de gestion des données à l’adresse suivante :
-📧 ${process.env.REACT_APP_BASE_MAIL}
-📮 PERFECT TRANSPORT – 3 Rue Joseph Barra, 95100 Argenteuil, France`
-    }
+      content: `Pour toute question relative à la protection de vos données personnelles :
+📧 ${process.env.REACT_APP_EMAIL || "contact@finipro.fr"}
+📮 FINI PRO – 6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne, France`,
+    },
   ];
 
   return (
-    <Box sx={{ width: "100%", py: 6, px: 2, bgcolor: "#121212" }}>
-      <Typography
-        variant="h3"
-        align="center"
-        gutterBottom
-        sx={{ color: "#FFD700" }}
-      >
-        Politique de Confidentialité & Sécurité – PERFECT TRANSPORT
-      </Typography>
-
-      <Paper
-        elevation={3}
+    <Box
+      sx={{
+        py: { xs: 5, md: 8 },
+        px: { xs: 2, md: 6 },
+        bgcolor: palette.stone,
+        color: palette.text,
+        minHeight: "100vh",
+      }}
+    >
+      <Box
+        component={motion.div}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         sx={{
-          p: 4,
-          mt: 4,
-          borderRadius: 2,
-          bgcolor: "#1E1E1E",
-          color: "#E0E0E0",
-          maxWidth: "1200px",
-          mx: "auto"
+          maxWidth: "1100px",
+          mx: "auto",
+          textAlign: "center",
+          mb: 4,
         }}
       >
-        {politiqueSections.map((section, idx) => (
-          <Box key={idx} mb={4}>
-            <Typography variant="h5" gutterBottom sx={{ color: "#FFD700" }}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: 700,
+            color: palette.olive,
+            fontFamily: "Playfair Display, serif",
+            mb: 1,
+          }}
+        >
+          Politique de Confidentialité & Sécurité
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            color: "rgba(31,31,31,0.7)",
+            fontFamily: "Inter, sans-serif",
+          }}
+        >
+          Chez FINI PRO, la protection de vos données personnelles est une priorité.
+        </Typography>
+      </Box>
+
+      <Paper
+        elevation={0}
+        sx={{
+          p: { xs: 3, md: 5 },
+          borderRadius: 3,
+          backgroundColor: "#fff",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.06)",
+          maxWidth: "1100px",
+          mx: "auto",
+        }}
+      >
+        {sections.map((section, idx) => (
+          <Box
+            key={idx}
+            component={motion.div}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            sx={{ mb: 4 }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                color: palette.olive,
+                fontWeight: 700,
+                mb: 1.2,
+                fontFamily: "Playfair Display, serif",
+              }}
+            >
               {section.title}
             </Typography>
-            <Typography sx={{ whiteSpace: "pre-line" }}>
+            <Typography
+              sx={{
+                fontSize: 15,
+                lineHeight: 1.7,
+                whiteSpace: "pre-line",
+                fontFamily: "Inter, sans-serif",
+              }}
+            >
               {section.content}
             </Typography>
           </Box>

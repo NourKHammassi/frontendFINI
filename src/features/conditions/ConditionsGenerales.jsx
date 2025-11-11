@@ -1,75 +1,65 @@
 import React from "react";
-import { Container, Typography, Box, Paper, Divider } from "@mui/material";
+import { Box, Container, Typography, Paper, Divider } from "@mui/material";
 import { motion } from "framer-motion";
 
 const palette = {
-  bronze: "#AD946B",
-  sand: "#ADA06B",
-  clay: "#AD846B",
-  text: "#2B2B2B",
-  lightBg: "linear-gradient(180deg,#FAF9F7 0%,#F4F2EE 100%)",
+  olive: "#4B6043",
+  darkOlive: "#556E51",
+  stone: "#F0F1EB",
+  text: "#1F1F1F",
+  white: "#FFFFFF",
 };
 
 export const ConditionsGeneralesVentes = () => {
   const sections = [
     {
       title: "Article 1 – Objet",
-      content:
-        "Les présentes CGV régissent les relations contractuelles entre EHR SARL et ses clients (particuliers ou professionnels) dans le cadre de prestations de travaux tous corps d’état, ingénierie, rénovation et coordination de chantier.",
+      content: `Les présentes Conditions Générales de Vente (CGV) définissent les modalités contractuelles entre FINI PRO et ses clients dans le cadre de travaux de finition, peinture, revêtements, plâtrerie, aménagement et nettoyage de fin de chantier.`,
     },
     {
-      title: "Article 2 – Commandes",
-      content:
-        "Toute demande de travaux donne lieu à un devis écrit. La commande devient ferme à la signature du devis ou à l’acceptation par email, accompagnée d’un acompte de 30 % du montant global.",
+      title: "Article 2 – Commandes et devis",
+      content: `Toute prestation donne lieu à un devis écrit et détaillé (nature des travaux, prix, délais, conditions particulières). La commande est considérée comme ferme dès signature du devis par le client avec la mention « Bon pour accord ».`,
     },
     {
-      title: "Article 3 – Tarifs et paiement",
-      content:
-        "Les prix sont exprimés en euros, TTC pour les particuliers, HT pour les professionnels. Le solde est dû à la livraison des travaux. Tout retard entraîne des pénalités conformément à l’article L441-10 du Code de commerce.",
+      title: "Article 3 – Tarifs et modalités de paiement",
+      content: `Les prix sont exprimés en euros (€) : TTC pour les particuliers, HT pour les professionnels. Un acompte peut être demandé à la commande (montant mentionné sur le devis). Le solde est payable à la fin des travaux, sauf accord écrit contraire. Tout retard de paiement entraîne des pénalités de retard et une indemnité forfaitaire de recouvrement de 40 €.`,
     },
     {
-      title: "Article 4 – Rétractation",
-      content:
-        "Les clients particuliers disposent d’un délai de 14 jours pour se rétracter pour les contrats conclus à distance, sauf si les travaux ont commencé avant la fin du délai.",
+      title: "Article 4 – Rétractation et annulation",
+      content: `Pour les particuliers : droit de rétractation de 14 jours pour les contrats conclus à distance ou hors établissement, sauf en cas de travaux urgents expressément demandés par le client. Pour les professionnels : aucune rétractation après acceptation écrite du devis.`,
     },
     {
-      title: "Article 5 – Exécution des prestations",
-      content:
-        "EHR s’engage à :\n\n- réaliser les prestations conformément aux règles de l’art et aux normes en vigueur,\n- respecter les délais convenus,\n- informer le client de tout incident ou retard éventuel.",
+      title: "Article 5 – Obligations du client",
+      content: `Le client s'engage à : fournir un accès sécurisé aux lieux du chantier, communiquer des informations exactes et complètes sur l’état des lieux, garantir la disponibilité des surfaces et zones de travail avant intervention.`,
     },
     {
-      title: "Article 6 – Responsabilité",
-      content:
-        "EHR est assurée en responsabilité civile décennale et professionnelle. La société ne saurait être tenue responsable :\n\n- des dommages indirects ou immatériels (perte de temps, d’exploitation, etc.),\n- ou d’une mauvaise utilisation des ouvrages par le client.",
+      title: "Article 6 – Obligations de FINI PRO",
+      content: `FINI PRO garantit : des matériaux conformes aux normes en vigueur, la garantie de parfait achèvement (1 an), la garantie biennale (2 ans) pour les éléments dissociables, et la garantie décennale pour les travaux structurels si applicable.`,
     },
     {
-      title: "Article 7 – Réclamations",
-      content:
-        "Toute réclamation doit être adressée par écrit à :\n📮 EHR SARL – 2 rue Perdonnet, 75010 Paris\n📧 contact@ehr-batiment.fr",
+      title: "Article 7 – Retards et impossibilité d’exécution",
+      content: `Aucune indemnisation n’est due en cas de retard causé par un cas de force majeure (intempéries, grève, panne, accident, blocage administratif, etc.).`,
     },
     {
-      title: "Article 8 – Données personnelles",
-      content:
-        "Les données client sont collectées uniquement pour la gestion administrative et commerciale. Aucune information n’est transmise à des tiers.",
+      title: "Article 8 – Responsabilité et assurances",
+      content: `FINI PRO est couverte par une assurance Responsabilité Civile Professionnelle. Toute mauvaise utilisation, dégradation après réalisation ou usage non conforme engage la responsabilité du client.`,
     },
     {
-      title: "Article 9 – Droit applicable",
-      content:
-        "Les présentes CGV sont régies par le droit français. En cas de litige, les tribunaux de Paris seront seuls compétents.",
+      title: "Article 9 – Données personnelles",
+      content: `Les données collectées sont utilisées exclusivement pour la gestion des devis, factures, chantiers et suivi client. Conformément au RGPD et à la Loi Informatique et Libertés.`,
+    },
+    {
+      title: "Article 10 – Réclamations et médiation",
+      content: `Toute réclamation doit être formulée dans les 7 jours suivant la fin des travaux. Les particuliers peuvent recourir gratuitement à un médiateur à la consommation agréé.`,
+    },
+    {
+      title: "Article 11 – Droit applicable et juridiction compétente",
+      content: `Les présentes CGV sont régies par le droit français. En cas de litige, compétence exclusive des juridictions du Tribunal de commerce de Créteil.`,
     },
   ];
 
   return (
-    <Box
-      sx={{
-        background: palette.lightBg,
-        py: { xs: 6, md: 10 },
-        px: 2,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <Box sx={{ backgroundColor: palette.stone, py: 10, width: "100%" }}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -81,63 +71,32 @@ export const ConditionsGeneralesVentes = () => {
             <Typography
               variant="h3"
               fontWeight={800}
-              sx={{
-                color: palette.bronze,
-                mb: 2,
-                letterSpacing: "0.5px",
-              }}
+              color={palette.olive}
+              mb={2}
             >
-              ⚖️ Conditions Générales de Vente
+              ⚖️ Conditions Générales de Vente – FINI PRO
             </Typography>
             <Typography
               variant="body1"
-              color="rgba(43,43,43,0.75)"
+              color={palette.text}
               maxWidth="45rem"
               mx="auto"
             >
-              Ces conditions s’appliquent à l’ensemble des prestations fournies
-              par <strong style={{ color: palette.bronze }}>EHR SARL</strong>,
-              société spécialisée dans les travaux tous corps d’état, l’ingénierie
-              et la rénovation.
+              Ces conditions s’appliquent à toutes les prestations fournies par FINI PRO, société spécialisée dans les travaux de finition et rénovation.
             </Typography>
           </Box>
 
-          {/* Content Card */}
+          {/* Articles */}
           <Paper
-            elevation={0}
             sx={{
               p: { xs: 4, md: 6 },
-              borderRadius: 4,
-              backgroundColor: "#fff",
-              boxShadow: "0 10px 35px rgba(173,148,107,0.15)",
-              lineHeight: 1.7,
+              borderRadius: 3,
+              backgroundColor: palette.white,
+              boxShadow: `0 6px 20px rgba(75,96,67,0.15)`,
               color: palette.text,
+              lineHeight: 1.7,
             }}
           >
-            {/* Company Info */}
-            <Box mb={5}>
-              <Typography variant="subtitle1" fontWeight={700} color={palette.clay} mb={1}>
-                Informations légales :
-              </Typography>
-              <Typography variant="body1" color="rgba(43,43,43,0.8)">
-                Société à responsabilité limitée (SARL) au capital de 30 000 €<br />
-                RCS Paris : 918 202 714<br />
-                Date d’immatriculation : 8 août 2022<br />
-                Siège social : 2 rue Perdonnet, 75010 Paris, France<br />
-                Gérant : M. Rida Awlade Dyafe, né le 15/12/1972 à Rennes (France)<br />
-                Activités principales : Travaux tous corps d’état, ingénierie,
-                rénovation et coordination de chantier.
-              </Typography>
-            </Box>
-
-            <Divider
-              sx={{
-                mb: 5,
-                borderColor: "rgba(173,148,107,0.3)",
-              }}
-            />
-
-            {/* Articles */}
             {sections.map((section, idx) => (
               <motion.div
                 key={idx}
@@ -152,8 +111,8 @@ export const ConditionsGeneralesVentes = () => {
                     fontWeight={700}
                     gutterBottom
                     sx={{
-                      color: palette.clay,
-                      borderLeft: `5px solid ${palette.bronze}`,
+                      color: palette.darkOlive,
+                      borderLeft: `5px solid ${palette.olive}`,
                       pl: 1.5,
                       mb: 1.5,
                     }}
@@ -162,15 +121,14 @@ export const ConditionsGeneralesVentes = () => {
                   </Typography>
                   <Typography
                     variant="body1"
-                    sx={{
-                      whiteSpace: "pre-line",
-                      color: "rgba(43,43,43,0.85)",
-                      pl: 0.5,
-                    }}
+                    sx={{ whiteSpace: "pre-line", color: palette.text }}
                   >
                     {section.content}
                   </Typography>
                 </Box>
+                {idx !== sections.length - 1 && (
+                  <Divider sx={{ borderColor: "rgba(75,96,67,0.2)", mb: 5 }} />
+                )}
               </motion.div>
             ))}
           </Paper>

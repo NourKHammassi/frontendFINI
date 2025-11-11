@@ -1,292 +1,167 @@
-// HomePage.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  Button,
+  Grid,
+} from "@mui/material";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "../features/navigation/components/Navbar";
 import { Footer } from "../features/footer/Footer";
-import { motion } from "framer-motion";
-import {
-  Container,
-  Box,
-  Typography,
-  Grid,
-  Button,
-  Card,
-  CardContent,
-} from "@mui/material";
-import EngineeringIcon from "@mui/icons-material/Engineering";
-import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
-import ConstructionIcon from "@mui/icons-material/Construction";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import { useNavigate } from "react-router-dom";
-import {
-  architecture,
-  construction,
-  engenier,
-  planning,
-  worker,
-  solar,
-} from "../assets";
+import PaletteIcon from "@mui/icons-material/Palette";
+import RoofingIcon from "@mui/icons-material/Roofing";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 
-/* 🎨 Bronze Palette */
-const bronze = "#AD946B";
-const beigeGold = "#ADA06B";
-const terracotta = "#AD846B";
-const dark = "#1B1B1B";
-const lightBg = "#FBFAF7";
+// 🪶 Refined neutral palette (clean, architectural)
+const palette = {
+  olive: "#4E5B45",
+  oliveDark: "#3F4A38",
+  stone: "#F2F3EE",
+  white: "#FFFFFF",
+  text: "#1F1F1F",
+  medium: "#5F5F5F",
+  lightBorder: "#E2E3DE",
+};
 
 export const HomePage = () => {
   const navigate = useNavigate();
+  const [activeProject, setActiveProject] = useState(0);
 
-  const highlights = [
+  const services = [
     {
-      title: "Maîtrise technique",
-      text: "Tous corps d’état — du gros-œuvre aux finitions, nous coordonnons et réalisons avec précision.",
-      icon: <EngineeringIcon sx={{ fontSize: 36, color: bronze }} />,
-      img: construction,
+      icon: <PaletteIcon sx={{ fontSize: 42, color: palette.olive }} />,
+      title: "Peinture intérieure & extérieure",
+      text: "Applications décoratives, techniques ou écologiques pour une finition impeccable.",
     },
     {
-      title: "Respect des délais",
-      text: "Planning maîtrisé, suivi régulier et communication transparente tout au long du chantier.",
-      icon: <HomeRepairServiceIcon sx={{ fontSize: 36, color: bronze }} />,
-      img: planning,
+      icon: <RoofingIcon sx={{ fontSize: 42, color: palette.olive }} />,
+      title: "Revêtements & sols",
+      text: "Pose de parquet, carrelage, moquette, PVC et finitions murales sur mesure.",
     },
     {
-      title: "Qualité & durabilité",
-      text: "Matériaux sélectionnés pour performance et impact environnemental réduit.",
-      icon: <ConstructionIcon sx={{ fontSize: 36, color: bronze }} />,
-      img: solar,
+      icon: <DesignServicesIcon sx={{ fontSize: 42, color: palette.olive }} />,
+      title: "Plâtrerie & aménagements",
+      text: "Cloisons, faux plafonds et isolation pour structurer et embellir vos espaces.",
+    },
+    {
+      icon: <CleaningServicesIcon sx={{ fontSize: 42, color: palette.olive }} />,
+      title: "Nettoyage de fin de chantier",
+      text: "Nettoyage complet, évacuation des déchets et remise en état après travaux.",
     },
   ];
+
+  const projects = [
+    {
+      img: "/images/project1.jpg",
+      title: "Appartement rénové à Paris 16ᵉ",
+      desc: "Rénovation complète avec finitions contemporaines et matériaux nobles.",
+    },
+    {
+      img: "/images/project2.jpg",
+      title: "Peinture écologique dans des bureaux",
+      desc: "Tons naturels et produits à faible impact environnemental.",
+    },
+    {
+      img: "/images/project3.jpg",
+      title: "Espace d’accueil d’entreprise",
+      desc: "Ambiance sobre et élégante grâce à des textures murales harmonieuses.",
+    },
+  ];
+
+  // Auto-slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveProject((prev) => (prev + 1) % projects.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [projects.length]);
 
   return (
     <>
       <Navbar />
 
-      {/* HERO */}
+      {/* INTRO SECTION */}
       <Box
         sx={{
-          position: "relative",
-          height: { xs: "85vh", md: "80vh" },
-          backgroundColor: "#F8F5EF", // beige clair doux
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#1B1B1B",
-          textAlign: "left",
-          px: { xs: 3, md: 8 },
+          backgroundColor: palette.stone,
+          pt: { xs: 8, md: 12 },
+          pb: { xs: 8, md: 12 },
+          textAlign: "center",
         }}
       >
-        <Container
-          maxWidth="lg"
-          sx={{
-            position: "relative",
-            zIndex: 2,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 4,
-          }}
-        >
-          {/* Texte principal */}
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-            style={{ flex: 1 }}
+        <Container maxWidth="md">
+          <Typography
+            variant="h2"
+            fontWeight={900}
+            color={palette.text}
+            mb={2}
+            sx={{ fontSize: { xs: 36, md: 48 } }}
           >
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: 900,
-                mb: 3,
-                letterSpacing: 0.5,
-                fontSize: { xs: "2.3rem", md: "3.3rem" },
-                color: "#1B1B1B",
-              }}
-            >
-              L’ingénierie au service de vos projets
-            </Typography>
-
-            <Typography
-              variant="h6"
-              sx={{
-                maxWidth: 600,
-                opacity: 0.8,
-                mb: 5,
-                fontWeight: 400,
-                lineHeight: 1.7,
-                color: "rgba(27,27,27,0.8)",
-              }}
-            >
-              De la conception à la réalisation, EHR vous accompagne dans tous vos projets
-              de construction et de rénovation — avec exigence, passion et savoir-faire.
-            </Typography>
-          </motion.div>
-
-          {/* Boutons à droite */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              gap: "16px",
-              flex: 1,
-            }}
+            Des finitions qui font la différence
+          </Typography>
+          <Typography
+            variant="h6"
+            color={palette.medium}
+            sx={{ maxWidth: 600, mx: "auto", lineHeight: 1.6 }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                background: `linear-gradient(90deg, ${bronze}, ${beigeGold})`,
-                color: "#fff",
-                fontWeight: 800,
-                px: 4,
-                py: 1.3,
-                borderRadius: 2,
-                fontSize: "1rem",
-                width: "fit-content",
-                boxShadow: "0 8px 20px rgba(173,148,107,0.4)",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 10px 28px rgba(173,148,107,0.55)",
-                },
-              }}
-              onClick={() => navigate("/demanderDevis")}
-            >
-              Demander un devis
-            </Button>
-
-            <Button
-              variant="outlined"
-              sx={{
-                borderColor: bronze,
-                color: bronze,
-                fontWeight: 700,
-                px: 3,
-                py: 1.2,
-                borderRadius: 2,
-                fontSize: "1rem",
-                width: "fit-content",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  backgroundColor: bronze,
-                  color: "#fff",
-                  borderColor: bronze,
-                  boxShadow: "0 8px 20px rgba(173,148,107,0.4)",
-                },
-              }}
-              onClick={() => navigate("/services")}
-            >
-              Découvrir nos métiers
-            </Button>
-          </motion.div>
+            FINI PRO réalise vos travaux de finition et rénovation intérieure avec
+            précision, durabilité et sens du détail.
+          </Typography>
         </Container>
       </Box>
 
-
-      {/* ABOUT */}
-      <Container maxWidth="lg" sx={{ py: 10 }}>
-        <Grid container spacing={8} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <motion.div
-              initial={{ x: -40, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Typography
-                variant="h3"
-                sx={{ fontWeight: 800, mb: 3, color: dark }}
-              >
-                Expertise, rigueur et vision
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "rgba(27,27,27,0.75)",
-                  mb: 3,
-                  lineHeight: 1.7,
-                }}
-              >
-                Depuis plus de dix ans, EHR se distingue par une approche
-                intégrée de la construction : ingénierie, coordination et
-                exécution. Nous plaçons l’humain, la durabilité et la qualité au
-                cœur de chaque réalisation.
-              </Typography>
-            </motion.div>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <motion.img
-              src={engenier}
-              alt="Ingénierie"
-              style={{
-                width: "100%",
-                borderRadius: "20px",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-                objectFit: "cover",
-              }}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* HIGHLIGHTS */}
-      <Box sx={{ backgroundColor: lightBg, py: 10 }}>
+      {/* SERVICES */}
+      <Box sx={{ backgroundColor: palette.white, py: { xs: 10, md: 14 } }}>
         <Container maxWidth="lg">
           <Typography
-            variant="h4"
-            sx={{
-              textAlign: "center",
-              fontWeight: 800,
-              mb: 6,
-              color: dark,
-            }}
+            variant="h3"
+            fontWeight={900}
+            textAlign="center"
+            mb={{ xs: 6, md: 8 }}
+            color={palette.text}
           >
-            Nos engagements
+            Nos Métiers
           </Typography>
 
-          <Grid container spacing={4}>
-            {highlights.map((h, i) => (
-              <Grid item xs={12} md={4} key={i}>
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 160 }}
-                >
+          <Grid container spacing={{ xs: 4, md: 6 }}>
+            {services.map((s, i) => (
+              <Grid item xs={12} sm={6} md={3} key={i}>
+                <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.3 }}>
                   <Card
                     sx={{
-                      borderRadius: 3,
-                      overflow: "hidden",
-                      boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+                      p: 4,
+                      borderRadius: 2,
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      textAlign: "center",
+                      border: `1px solid ${palette.lightBorder}`,
+                      boxShadow: "none",
+                      backgroundColor: palette.white,
                     }}
                   >
-                    <Box
-                      sx={{
-                        height: 180,
-                        backgroundImage: `url(${h.img})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    />
-                    <CardContent>
-                      <Box sx={{ mb: 2 }}>{h.icon}</Box>
-                      <Typography
-                        variant="h6"
-                        sx={{ fontWeight: 700, mb: 1, color: dark }}
-                      >
-                        {h.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "rgba(27,27,27,0.7)" }}
-                      >
-                        {h.text}
-                      </Typography>
-                    </CardContent>
+                    {s.icon}
+                    <Typography
+                      variant="h6"
+                      fontWeight={700}
+                      color={palette.text}
+                      mt={2}
+                      mb={1}
+                    >
+                      {s.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color={palette.medium}
+                      sx={{ lineHeight: 1.6 }}
+                    >
+                      {s.text}
+                    </Typography>
                   </Card>
                 </motion.div>
               </Grid>
@@ -295,60 +170,125 @@ export const HomePage = () => {
         </Container>
       </Box>
 
-      {/* CTA FINAL */}
+      {/* PROJECT CAROUSEL */}
+      <Box sx={{ backgroundColor: palette.stone, py: { xs: 10, md: 14 } }}>
+        <Container maxWidth="md" textAlign="center">
+          <motion.div
+            key={activeProject}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              borderRadius: 16,
+              overflow: "hidden",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.12)",
+            }}
+          >
+            <img
+              src={projects[activeProject].img}
+              alt={projects[activeProject].title}
+              style={{ width: "100%", display: "block" }}
+            />
+            <Box sx={{ p: 5, backgroundColor: palette.white }}>
+              <Typography variant="h5" fontWeight={700} mb={1}>
+                {projects[activeProject].title}
+              </Typography>
+              <Typography variant="body1" color={palette.medium}>
+                {projects[activeProject].desc}
+              </Typography>
+            </Box>
+          </motion.div>
+        </Container>
+      </Box>
+
+      {/* CTA + STATS */}
       <Box
         sx={{
-          backgroundImage: `url(${worker})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          py: 12,
-          position: "relative",
-          color: "#fff",
-          textAlign: "center",
+          backgroundColor: palette.white,
+          py: { xs: 10, md: 14 },
+          borderTop: `1px solid ${palette.lightBorder}`,
         }}
       >
-        <Box
+        <Container
+          maxWidth="lg"
           sx={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0,0,0,0.6)",
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: 8,
+            alignItems: "center",
           }}
-        />
-        <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 900, mb: 2, letterSpacing: 0.5 }}
-          >
-            Votre projet, notre mission
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              opacity: 0.9,
-              mb: 4,
-              maxWidth: 650,
-              mx: "auto",
-            }}
-          >
-            Quelle que soit la taille ou la complexité de votre chantier, nous
-            vous accompagnons avec expertise et engagement, de l’idée à la
-            livraison.
-          </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              background: `linear-gradient(90deg, ${terracotta}, ${bronze})`,
-              color: "#fff",
-              px: 5,
-              py: 1.5,
-              fontWeight: 800,
-              borderRadius: 2,
-              "&:hover": { opacity: 0.9 },
-            }}
-            onClick={() => navigate("/demanderDevis")}
-          >
-            Demander un devis gratuit
-          </Button>
+        >
+          {/* Stats */}
+          <Grid container spacing={4} xs={12} md={6}>
+            {[
+              { label: "Chantiers terminés", value: 120 },
+              { label: "Clients satisfaits", value: 95 },
+              { label: "Années d’expérience", value: 10 },
+            ].map((stat, i) => (
+              <Grid item xs={12} key={i}>
+                <Card
+                  sx={{
+                    p: 4,
+                    borderRadius: 2,
+                    border: `1px solid ${palette.lightBorder}`,
+                    boxShadow: "none",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    backgroundColor: palette.stone,
+                  }}
+                >
+                  <Typography
+                    variant="h5"
+                    fontWeight={800}
+                    color={palette.olive}
+                  >
+                    {stat.value}+
+                  </Typography>
+                  <Typography variant="body1" color={palette.text}>
+                    {stat.label}
+                  </Typography>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* CTA */}
+          <Box xs={12} md={6} textAlign={{ xs: "center", md: "left" }}>
+            <Typography
+              variant="h3"
+              fontWeight={900}
+              mb={3}
+              color={palette.text}
+              sx={{ fontSize: { xs: 28, md: 36 } }}
+            >
+              Lancez votre projet avec FINI PRO
+            </Typography>
+            <Typography
+              variant="body1"
+              color={palette.medium}
+              mb={5}
+              sx={{ lineHeight: 1.7 }}
+            >
+              Une équipe experte, des matériaux certifiés et un suivi rigoureux
+              pour vos travaux de finition et rénovation.
+            </Typography>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: palette.olive,
+                color: palette.white,
+                px: 5,
+                py: 1.5,
+                fontWeight: 700,
+                borderRadius: 2,
+                "&:hover": { backgroundColor: palette.oliveDark },
+              }}
+              onClick={() => navigate("/demanderDevis")}
+            >
+              Demander un devis gratuit
+            </Button>
+          </Box>
         </Container>
       </Box>
 

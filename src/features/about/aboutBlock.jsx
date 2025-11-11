@@ -1,298 +1,128 @@
 // AboutBlock.jsx
 import React from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-} from "@mui/material";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import GroupsIcon from "@mui/icons-material/Groups";
+import { Box, Container, Typography, Grid, Paper, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-import { construction, engenier, plann } from "../../assets";
+import { WorkspacePremium, Verified, Schedule, Brush } from "@mui/icons-material";
+import { construction } from "../../assets";
 
 const palette = {
-  bronze: "#AD946B",
-  sand: "#ADA06B",
-  clay: "#AD846B",
-  text: "#2B2B2B",
-  bg: "#FAF9F7",
+  primary: "#4B6043",
+  accent: "#2C3A2A",
+  stone: "#ECEFE6", // match navbar/footer
+  text: "#1F1F1F",
+  bg: "#ECEFE6",
 };
 
 export const AboutBlock = () => {
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, delay: i * 0.2 },
-    }),
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }),
   };
 
+  const cards = [
+    { icon: <WorkspacePremium />, title: "Outils modernes & matériaux certifiés" },
+    { icon: <Verified />, title: "Suivi de chantier transparent" },
+    { icon: <Schedule />, title: "Prix ajustés à vos besoins réels" },
+    { icon: <Brush />, title: "Haut niveau de finition" },
+  ];
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        background: palette.bg,
-        overflow: "hidden",
-        py: { xs: 6, md: 10 },
-      }}
-    >
-      {/* 🌅 Bandeau supérieur semi-transparent */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "50%",
-          // backgroundImage: `url(${construction})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.15,
-          filter: "blur(3px)",
-        }}
-      />
-
-      <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-        <Paper
+    <Box sx={{ backgroundColor: palette.bg, py: { xs: 5, md: 8 } }}>
+      <Container maxWidth="lg">
+        {/* Hero */}
+        <Box
           component={motion.div}
-          initial={{ opacity: 0, y: 60 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          sx={{
-            p: { xs: 3, md: 6 },
-            borderRadius: 4,
-            backgroundColor: "#fff",
-            boxShadow: "0 10px 40px rgba(173,148,107,0.25)",
-            border: `1px solid ${palette.bronze}33`,
-            overflow: "hidden",
-          }}
+          sx={{ mb: 6, textAlign: "center", px: { xs: 2, md: 6 } }}
         >
-          {/* Header avec image subtile */}
-          <Box
-            sx={{
-              backgroundImage: `url(${engenier})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: 180,
-              borderRadius: 3,
-              mb: 4,
-              position: "relative",
-            }}
-          >
+          <Typography variant="h3" fontWeight={800} sx={{ color: palette.primary, mb: 2, fontFamily: "Playfair Display, serif" }}>
+            À propos de FINI PRO
+          </Typography>
+          <Typography variant="h6" sx={{ color: palette.text, maxWidth: 680, mx: "auto", lineHeight: 1.6, fontFamily: "Inter, sans-serif" }}>
+            Entreprise de travaux de finition fondée par <strong>Saif Allah RAGUED</strong>, artisan passionné du bâtiment depuis plus de 10 ans. Nous transformons vos espaces avec précision, rigueur et sens du détail.
+          </Typography>
+        </Box>
+
+        {/* Image + text */}
+        <Grid container spacing={6} alignItems="center">
+          <Grid item xs={12} md={6}>
             <Box
+              component={motion.div}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
               sx={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(0,0,0,0.45)",
+                height: 320,
                 borderRadius: 3,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                backgroundImage: `url(${construction})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
               }}
-            >
-              <Typography
-                variant="h3"
-                fontWeight={900}
-                textAlign="center"
-                sx={{
-                  color: "#fff",
-                  letterSpacing: 0.5,
-                }}
-                component={motion.h2}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                À propos de EHR
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Stack spacing={3}>
+              <Typography variant="h4" sx={{ fontWeight: 700, color: palette.primary, fontFamily: "Playfair Display, serif" }}>
+                Qui sommes-nous ?
               </Typography>
-            </Box>
-          </Box>
-
-          {/* Contenu */}
-          <Stack spacing={3}>
-            <Typography
-              variant="h5"
-              fontWeight={700}
-              sx={{ color: palette.clay }}
-              component={motion.div}
-              custom={0}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              Expertise, Honnêteté, Réalisation
-            </Typography>
-
-            <Typography
-              variant="body1"
-              color="rgba(43,43,43,0.85)"
-              component={motion.div}
-              custom={1}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              Fondée en 2022 par <strong>Rida Awlade Dyafe</strong>, ingénieur et
-              entrepreneur passionné, <strong>EHR</strong> est née d’une idée simple :
-              réunir la précision de l’ingénierie et le savoir-faire du terrain au
-              service de projets exigeants.
-            </Typography>
-
-            <Typography
-              variant="body1"
-              color="rgba(43,43,43,0.85)"
-              component={motion.div}
-              custom={2}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              Basée à <strong>Paris</strong>, notre société intervient sur des chantiers
-              variés — logements, bureaux, commerces, bâtiments industriels — avec la
-              même rigueur et le même souci du détail.
-            </Typography>
-
-            <Typography
-              variant="body1"
-              color="rgba(43,43,43,0.85)"
-              component={motion.div}
-              custom={3}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              Notre mission : offrir à chaque client un accompagnement clair, une
-              exécution sans compromis et des ouvrages durables.
-            </Typography>
-
-            {/* 🧱 Nos valeurs */}
-            <Box mt={4}>
-              <Typography
-                variant="h5"
-                fontWeight={700}
-                sx={{ color: palette.clay, mb: 2 }}
-                component={motion.div}
-                custom={4}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                Nos valeurs
+              <Typography variant="body1" sx={{ color: palette.text, fontFamily: "Inter, sans-serif", lineHeight: 1.7 }}>
+                Nous intervenons sur des chantiers de particuliers et professionnels, avec trois promesses : respect des délais, suivi clair et finition irréprochable. Chaque projet est une vitrine de notre savoir-faire.
               </Typography>
+            </Stack>
+          </Grid>
+        </Grid>
 
-              <List>
-                <ListItem
+        {/* Mission cards */}
+        <Box sx={{ mt: 8 }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, color: palette.primary, mb: 4, textAlign: "center", fontFamily: "Playfair Display, serif" }}>
+            Notre mission
+          </Typography>
+          <Grid container spacing={3}>
+            {cards.map((card, i) => (
+              <Grid item xs={12} sm={6} md={3} key={i}>
+                <Paper
                   component={motion.div}
-                  custom={5}
+                  custom={i}
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                >
-                  <ListItemIcon>
-                    <HandshakeIcon sx={{ color: palette.bronze }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Engagement"
-                    secondary="Nous respectons nos délais, nos devis et nos promesses."
-                  />
-                </ListItem>
-
-                <ListItem
-                  component={motion.div}
-                  custom={6}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <ListItemIcon>
-                    <WorkspacePremiumIcon sx={{ color: palette.bronze }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Excellence"
-                    secondary="Chaque détail compte, de la planification à la finition."
-                  />
-                </ListItem>
-
-                <ListItem
-                  component={motion.div}
-                  custom={7}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  <ListItemIcon>
-                    <GroupsIcon sx={{ color: palette.bronze }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Respect"
-                    secondary="Du client, des équipes, des normes et de l’environnement."
-                  />
-                </ListItem>
-              </List>
-            </Box>
-
-            {/* 🏗️ Conclusion visuelle */}
-            <Box
-              sx={{
-                mt: 4,
-                position: "relative",
-                borderRadius: 3,
-                overflow: "hidden",
-                height: 200,
-              }}
-            >
-              <img
-                src={plann}
-                alt="Planification"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "brightness(0.8)",
-                }}
-              />
-              <Box
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(0,0,0,0.45)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  variant="h6"
                   sx={{
-                    color: "#fff",
-                    fontWeight: 700,
+                    p: 3,
                     textAlign: "center",
+                    borderRadius: 2,
+                    backgroundColor: "#fff",
+                    boxShadow: "0 3px 15px rgba(0,0,0,0.08)",
+                    transition: "all 0.3s ease",
+                    "&:hover": { transform: "translateY(-4px)", boxShadow: "0 6px 20px rgba(0,0,0,0.12)" },
                   }}
                 >
-                  🚀 Avec EHR, vos projets prennent forme avec précision et confiance.
-                </Typography>
-              </Box>
-            </Box>
-          </Stack>
-        </Paper>
+                  <Box sx={{ fontSize: 34, mb: 1.5, color: palette.primary, display: "flex", justifyContent: "center" }}>
+                    {card.icon}
+                  </Box>
+                  <Typography variant="subtitle1" sx={{ color: palette.text, fontWeight: 600, fontFamily: "Inter, sans-serif" }}>
+                    {card.title}
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Vision */}
+        <Box sx={{ mt: 8, textAlign: "center", maxWidth: 720, mx: "auto" }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, color: palette.primary, mb: 2, fontFamily: "Playfair Display, serif" }}>
+            Notre vision
+          </Typography>
+          <Typography variant="body1" sx={{ color: palette.text, lineHeight: 1.7, fontFamily: "Inter, sans-serif" }}>
+            Parce qu’un projet réussi passe par une finition impeccable, nous faisons de chaque chantier une vitrine de notre savoir-faire. Notre approche repose sur l’écoute, la maîtrise technique et un accompagnement personnalisé.
+          </Typography>
+        </Box>
       </Container>
     </Box>
   );

@@ -23,14 +23,13 @@ import {
 } from "../AuthSlice";
 import { toast } from "react-toastify";
 import { login } from "../../../assets";
-// import avatarImg from "../../../assets/images/Livreur.png";
 
 const palette = {
-  bronze: "#AD946B",
-  sand: "#C6B37E",
-  clay: "#AD846B",
-  bg: "linear-gradient(180deg, #FAF9F7 0%, #F6F3EF 100%)",
-  text: "#2B2B2B",
+  olive: "#4B6043",
+  darkOlive: "#556E51",
+  stone: "#F0F1EB",
+  text: "#1F1F1F",
+  white: "#FFFFFF",
 };
 
 export const Signup = () => {
@@ -46,6 +45,7 @@ export const Signup = () => {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -87,26 +87,26 @@ export const Signup = () => {
         justifyContent: "center",
         px: 2,
         py: 6,
-        background: palette.bg,
+        background: palette.stone,
       }}
     >
-      {/* Titre principal */}
+      {/* Title */}
       <Typography
         variant="h3"
         sx={{
           mb: 5,
           fontWeight: 800,
-          background: `linear-gradient(90deg, ${palette.bronze}, ${palette.clay})`,
+          background: `linear-gradient(90deg, ${palette.olive}, ${palette.darkOlive})`,
           WebkitBackgroundClip: "text",
           color: "transparent",
           textAlign: "center",
           letterSpacing: 0.5,
         }}
       >
-        Créez votre compte EHR
+        Créez votre compte FINI PRO
       </Typography>
 
-      {/* Conteneur principal */}
+      {/* Main container */}
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={6}
@@ -117,64 +117,44 @@ export const Signup = () => {
           justifyContent: "center",
         }}
       >
-        {/* Image gauche */}
+        {/* Left image */}
         {!isMobile && (
-          <Box
-            flex={1}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
+          <Box flex={1} display="flex" justifyContent="center" alignItems="center">
             <img
               src={login}
-              alt="EHR"
+              alt="FINI PRO"
               style={{
                 width: "100%",
                 maxWidth: 380,
                 borderRadius: "20px",
                 objectFit: "contain",
-                boxShadow: "0 8px 20px rgba(173,148,107,0.25)",
+                boxShadow: "0 8px 20px rgba(75,96,67,0.25)",
               }}
             />
           </Box>
         )}
 
-        {/* Formulaire */}
-        <PaperMotion
-          onSubmit={handleSubmit(handleSignup)}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Typography
-            variant="h5"
-            fontWeight={700}
-            sx={{ color: palette.bronze, mb: 2 }}
-          >
+        {/* Form */}
+        <PaperMotion onSubmit={handleSubmit(handleSignup)}>
+          <Typography variant="h5" fontWeight={700} sx={{ color: palette.olive, mb: 2 }}>
             Inscrivez-vous gratuitement
           </Typography>
 
           <Typography
             variant="body1"
-            sx={{
-              color: "rgba(43,43,43,0.7)",
-              mb: 3,
-              fontSize: 15,
-            }}
+            sx={{ color: palette.text, mb: 3, fontSize: 15, textAlign: "center" }}
           >
-            Créez un compte pour accéder à nos services de transport et déménagement.
+            Créez un compte pour accéder à nos services FINI PRO.
           </Typography>
 
-          <Stack spacing={2.5}>
+          <Stack spacing={2.5} width="100%">
             <TextField
               placeholder="Nom d'utilisateur"
               fullWidth
               variant="outlined"
               {...register("name", { required: "Nom d'utilisateur requis" })}
             />
-            {errors.name && (
-              <FormHelperText error>{errors.name.message}</FormHelperText>
-            )}
+            {errors.name && <FormHelperText error>{errors.name.message}</FormHelperText>}
 
             <TextField
               placeholder="Email professionnel"
@@ -183,14 +163,12 @@ export const Signup = () => {
               {...register("email", {
                 required: "Email requis",
                 pattern: {
-                  value: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/,
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "Email invalide",
                 },
               })}
             />
-            {errors.email && (
-              <FormHelperText error>{errors.email.message}</FormHelperText>
-            )}
+            {errors.email && <FormHelperText error>{errors.email.message}</FormHelperText>}
 
             <TextField
               type="password"
@@ -199,9 +177,7 @@ export const Signup = () => {
               variant="outlined"
               {...register("password", { required: "Mot de passe requis" })}
             />
-            {errors.password && (
-              <FormHelperText error>{errors.password.message}</FormHelperText>
-            )}
+            {errors.password && <FormHelperText error>{errors.password.message}</FormHelperText>}
 
             <TextField
               type="password"
@@ -210,15 +186,12 @@ export const Signup = () => {
               variant="outlined"
               {...register("confirmPassword", {
                 required: "Confirmation requise",
-                validate: (value, formValues) =>
-                  value === formValues.password ||
-                  "Les mots de passe ne correspondent pas",
+                validate: (value) =>
+                  value === getValues("password") || "Les mots de passe ne correspondent pas",
               })}
             />
             {errors.confirmPassword && (
-              <FormHelperText error>
-                {errors.confirmPassword.message}
-              </FormHelperText>
+              <FormHelperText error>{errors.confirmPassword.message}</FormHelperText>
             )}
 
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
@@ -232,11 +205,11 @@ export const Signup = () => {
                   fontWeight: 700,
                   fontSize: 16,
                   borderRadius: 2,
-                  background: `linear-gradient(90deg, ${palette.bronze}, ${palette.sand})`,
-                  boxShadow: "0 6px 16px rgba(173,132,107,0.4)",
+                  background: `linear-gradient(90deg, ${palette.olive}, ${palette.darkOlive})`,
+                  boxShadow: "0 6px 16px rgba(75,96,67,0.4)",
                   "&:hover": {
-                    background: `linear-gradient(90deg, ${palette.clay}, ${palette.sand})`,
-                    boxShadow: "0 8px 22px rgba(173,132,107,0.45)",
+                    background: `linear-gradient(90deg, ${palette.darkOlive}, ${palette.olive})`,
+                    boxShadow: "0 8px 22px rgba(75,96,67,0.45)",
                   },
                 }}
               >
@@ -251,7 +224,7 @@ export const Signup = () => {
               to="/login"
               sx={{
                 textDecoration: "none",
-                color: palette.clay,
+                color: palette.darkOlive,
                 fontWeight: 600,
                 "&:hover": { textDecoration: "underline" },
               }}
@@ -265,7 +238,7 @@ export const Signup = () => {
   );
 };
 
-// ✅ Composant Motion pour la carte formulaire
+// ✅ Motion-form component
 const PaperMotion = ({ children, ...props }) => (
   <motion.form
     {...props}
@@ -274,7 +247,7 @@ const PaperMotion = ({ children, ...props }) => (
       backgroundColor: "#fff",
       padding: "2.5rem",
       borderRadius: "1.5rem",
-      boxShadow: "0 10px 40px rgba(173,148,107,0.2)",
+      boxShadow: "0 10px 40px rgba(75,96,67,0.2)",
       maxWidth: "450px",
       width: "100%",
       display: "flex",

@@ -6,29 +6,44 @@ import {
   Button,
   Paper,
   Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { axiosi } from "../../config/axios";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
 
 const palette = {
-  bronze: "#AD946B",
-  sand: "#ADA06B",
-  clay: "#AD846B",
-  text: "#2B2B2B",
-  bg: "linear-gradient(180deg, #FAF9F7 0%, #F6F3EF 100%)",
+  primary: "#2E4F2E", // dark green
+  secondary: "#4B7A4B", // olive green
+  accent: "#8AA78F", // light green
+  bg: "#F7F9F6",
+  text: "#1F1F1F",
+  textLight: "rgba(31,31,31,0.7)",
+  white: "#FFFFFF",
 };
 
 export const DevisForm = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({ defaultValues: { consent: false } });
 
   const onSubmit = async (data) => {
+    if (!data.consent) {
+      toast.error("Vous devez accepter le RGPD pour envoyer la demande.");
+      return;
+    }
     try {
       const response = await axiosi.post("/devis/sendDevis", data);
       if (response.status === 201) {
@@ -47,15 +62,14 @@ export const DevisForm = () => {
       sx={{
         background: palette.bg,
         minHeight: "100vh",
-        py: { xs: 6, md: 10 },
+        py: { xs: 8, md: 10 },
         px: 2,
         display: "flex",
         justifyContent: "center",
-        alignItems: "flex-start",
       }}
     >
       <Box sx={{ maxWidth: 900, width: "100%" }}>
-        {/* SECTION INTRO */}
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,81 +79,46 @@ export const DevisForm = () => {
             variant="h3"
             fontWeight={800}
             textAlign="center"
-            sx={{
-              color: palette.bronze,
-              mb: 2,
-              letterSpacing: 0.5,
-            }}
+            sx={{ color: palette.primary, mb: 2, letterSpacing: 1 }}
           >
-            Devis & Contact
+            📞 Contactez FINI PRO pour un devis personnalisé
+          </Typography>
+
+          <Typography
+            variant="body1"
+            textAlign="center"
+            sx={{ color: palette.textLight, mb: 3, lineHeight: 1.8 }}
+          >
+            Chez <strong>FINI PRO</strong>, nous combinons expertise, réactivité et accompagnement sur-mesure.<br />
+            Que vous planifiez des travaux de rénovation, de peinture, de revêtements ou d’aménagement, notre équipe vous conseille et vous guide à chaque étape.
           </Typography>
 
           <Typography
             variant="h5"
-            textAlign="center"
             fontWeight={600}
-            color={palette.text}
-            mb={3}
+            textAlign="center"
+            sx={{ color: palette.secondary, mb: 3 }}
           >
-            Discutons de votre projet
+            🛠️ Demande de devis ou informations
           </Typography>
 
           <Typography
             variant="body1"
             textAlign="center"
-            sx={{ color: "rgba(43,43,43,0.75)", mb: 4, lineHeight: 1.8 }}
+            sx={{ color: palette.textLight, mb: 4, lineHeight: 1.6 }}
           >
-            Un projet de <strong>rénovation</strong>, de <strong>construction</strong> ou d’
-            <strong>aménagement</strong> ? <br />
-            Contactez-nous dès aujourd’hui pour bénéficier de l’expertise{" "}
-            <strong style={{ color: palette.clay }}>EHR</strong>. <br />
-            Nos équipes étudient votre demande et vous proposent un{" "}
-            <strong>devis gratuit et détaillé sous 48h</strong>.
+            Pour toute demande concernant :<br />
+            • Travaux de peinture intérieure ou extérieure<br />
+            • Pose de revêtements (sols, murs, carrelage, parquet, etc.)<br />
+            • Plâtrerie, aménagement ou rénovation globale<br />
+            • Services complémentaires (nettoyage de fin de chantier, petits travaux)<br />
+            Merci d’utiliser le formulaire ci-dessous pour que nous puissions vous répondre rapidement et précisément.
           </Typography>
 
-          {/* INFOS DE CONTACT — INLINE */}
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 2, sm: 6 }}
-            justifyContent="center"
-            alignItems="center"
-            sx={{ mb: 6, color: palette.text }}
-          >
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <LocationOnIcon sx={{ color: palette.bronze }} />
-              <Typography variant="body2">
-                2 rue Perdonnet, 75010 Paris
-              </Typography>
-            </Stack>
 
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <EmailIcon sx={{ color: palette.bronze }} />
-              <Typography variant="body2">
-                contact@ehr-batiment.fr
-              </Typography>
-            </Stack>
-
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <PhoneIcon sx={{ color: palette.bronze }} />
-              <Typography variant="body2">
-                01 84 00 00 00
-              </Typography>
-            </Stack>
-          </Stack>
-
-          <Typography
-            variant="body1"
-            textAlign="center"
-            color="rgba(43,43,43,0.75)"
-            mb={6}
-          >
-            Ou remplissez simplement notre formulaire en ligne, en précisant vos besoins,
-            votre budget et vos délais. <br />
-            Nous reviendrons vers vous rapidement pour en discuter ensemble.
-          </Typography>
         </motion.div>
 
-        {/* FORMULAIRE */}
+        {/* FORM */}
         <Paper
           component={motion.form}
           onSubmit={handleSubmit(onSubmit)}
@@ -147,36 +126,22 @@ export const DevisForm = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           sx={{
-            p: { xs: 3, md: 6 },
+            p: 6,
             borderRadius: 4,
-            backgroundColor: "#fff",
-            boxShadow: "0 10px 40px rgba(173,148,107,0.25)",
+            backgroundColor: palette.white,
+            boxShadow: "0 12px 36px rgba(0,0,0,0.12)",
             maxWidth: 700,
             mx: "auto",
           }}
         >
-          <Typography
-            variant="h5"
-            fontWeight={700}
-            textAlign="center"
-            sx={{
-              color: palette.bronze,
-              mb: 4,
-              letterSpacing: 0.5,
-            }}
-          >
-            Formulaire de demande de devis
-          </Typography>
-
           <Stack spacing={3}>
             <TextField
-              label="Nom / Société"
+              label="Nom et prénom / Société"
               {...register("name", { required: "Nom ou société requis" })}
               error={!!errors.name}
               helperText={errors.name?.message}
               fullWidth
             />
-
             <TextField
               label="Email"
               {...register("email", { required: "Email requis" })}
@@ -184,61 +149,118 @@ export const DevisForm = () => {
               helperText={errors.email?.message}
               fullWidth
             />
+            <TextField
+              label="Téléphone"
+              {...register("phone", { required: "Téléphone requis" })}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
+              fullWidth
+            />
 
-            <TextField label="Téléphone" {...register("phone")} fullWidth />
+            <FormControl fullWidth>
+              <InputLabel>Type de demande</InputLabel>
+              <Controller
+                name="typeOfRequest"
+                control={control}
+                rules={{ required: "Type de demande requis" }}
+                render={({ field }) => (
+                  <Select {...field} label="Type de demande" error={!!errors.typeOfRequest}>
+                    <MenuItem value="peinture">Travaux de peinture</MenuItem>
+                    <MenuItem value="revetement">Revêtements sols et murs</MenuItem>
+                    <MenuItem value="platrerie">Plâtrerie / Aménagement</MenuItem>
+                    <MenuItem value="nettoyage">Nettoyage de fin de chantier</MenuItem>
+                    <MenuItem value="autre">Autre</MenuItem>
+                  </Select>
+                )}
+              />
+              {errors.typeOfRequest && (
+                <Typography variant="caption" color="error">
+                  {errors.typeOfRequest.message}
+                </Typography>
+              )}
+            </FormControl>
 
             <TextField
-              label="Type de projet (ex : rénovation, extension, aménagement)"
-              {...register("projectType", { required: "Type de projet requis" })}
-              error={!!errors.projectType}
-              helperText={errors.projectType?.message}
+              label="Objet de la demande"
+              {...register("subject", { required: "Objet requis" })}
+              error={!!errors.subject}
+              helperText={errors.subject?.message}
               fullWidth
             />
 
             <TextField
-              label="Lieu des travaux"
-              {...register("location", { required: "Lieu requis" })}
-              error={!!errors.location}
-              helperText={errors.location?.message}
-              fullWidth
-            />
-
-            <TextField label="Budget estimé (€)" type="number" {...register("budget")} fullWidth />
-
-            <TextField label="Délai souhaité" {...register("deadline")} fullWidth />
-
-            <TextField
-              label="Message ou détails du projet"
-              {...register("message", { required: "Veuillez décrire votre projet" })}
-              error={!!errors.message}
-              helperText={errors.message?.message}
+              label="Description détaillée"
+              {...register("description", { required: "Veuillez décrire votre projet" })}
+              error={!!errors.description}
+              helperText={errors.description?.message}
               multiline
               rows={4}
               fullWidth
+            />
+
+            <FormControlLabel
+              control={
+                <Controller
+                  name="consent"
+                  control={control}
+                  render={({ field }) => <Checkbox {...field} />}
+                />
+              }
+              label="✅ J’accepte que mes données soient utilisées uniquement pour le traitement de ma demande, conformément à la politique de confidentialité de FINI PRO."
             />
 
             <Button
               type="submit"
               variant="contained"
               sx={{
-                background: `linear-gradient(90deg, ${palette.bronze}, ${palette.clay})`,
-                color: "#fff",
-                py: 1.4,
+                background: `linear-gradient(90deg, ${palette.primary}, ${palette.secondary})`,
+                color: palette.white,
+                py: 1.5,
                 fontWeight: 700,
                 fontSize: 16,
-                borderRadius: 2,
+                borderRadius: 3,
                 mt: 2,
-                boxShadow: "0 8px 22px rgba(173,148,107,0.4)",
-                "&:hover": {
-                  background: `linear-gradient(90deg, ${palette.clay}, ${palette.sand})`,
-                  boxShadow: "0 10px 26px rgba(173,132,107,0.45)",
-                },
+                "&:hover": { background: `linear-gradient(90deg, ${palette.secondary}, ${palette.accent})` },
               }}
             >
-              Envoyer ma demande de devis
+              Envoyer ma demande
             </Button>
+
+            <Typography
+              variant="body2"
+              textAlign="center"
+              sx={{ color: palette.textLight, mb: 6, fontStyle: "italic" }}
+            >
+              ⚠️ Toute intervention ne peut être planifiée qu’après validation formelle du devis envoyé par FINI PRO.
+            </Typography>
           </Stack>
+
         </Paper>
+        {/* <Typography
+          variant="body2"
+          textAlign="center"
+          sx={{ color: palette.textLight, mt: 4 }}
+        >
+          🚀 FINI PRO, votre partenaire finition et rénovation partout en France !<br />
+          Nous intervenons dans toute la France pour répondre à vos besoins avec professionnalisme et rapidité.
+        </Typography> */}
+
+
+        <Typography
+          variant="subtitle1"
+          fontWeight={600}
+          textAlign="center"
+          sx={{ color: palette.primary, mb: 2 }}
+        >
+          🏢 Coordonnées FINI PRO
+        </Typography>
+        <Typography variant="body2" textAlign="center" sx={{ color: palette.textLight, mb: 6 }}>
+          Raison sociale : RAGUED Saif Allah (EI) – FINI PRO<br />
+          Adresse : 6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne<br />
+          Téléphone : {process.env.REACT_APP_PHONE_NUMBER}<br />
+          Email : {process.env.REACT_APP_EMAIL}<br />
+          RCS : 944 924 273 R.C.S. Créteil
+        </Typography>
       </Box>
     </Box>
   );

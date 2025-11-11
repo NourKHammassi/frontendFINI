@@ -1,171 +1,262 @@
 // Footer.jsx
 import * as React from "react";
-import {
-  Box,
-  Stack,
-  Typography,
-  Grid,
-  useMediaQuery,
-  useTheme,
-  Divider,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectLoggedInUser } from "../auth/AuthSlice";
 import { motion } from "framer-motion";
-import {
-  Visa,
-  Mastercard,
-  Amex,
-  Applepay,
-  Googlepay,
-} from "react-pay-icons"; // ✅ Ajoutés Apple & Google Pay
+import { Visa, Mastercard, Amex, Applepay, Googlepay } from "react-pay-icons";
 
-/* 🎨 Palette EHR */
 const palette = {
-  bronze: "#AD946B",
-  beigeGold: "#ADA06B",
-  terracotta: "#AD846B",
-  text: "#1B1B1B",
-  bgLight: "linear-gradient(180deg,#FBFAF7 0%,#F5F3EE 100%)",
-  border: "rgba(27,27,27,0.08)",
+  olive: "#4B6043",
+  darkOlive: "#556E51",
+  stone: "#E6E8E6",
+  text: "#1F1F1F",
 };
-
-const FooterWrap = styled(Box)(({ theme }) => ({
-  background: palette.bgLight,
-  color: palette.text,
-  padding: "48px 28px 0px",
-  borderTop: `3px solid ${palette.bronze}`,
-  [theme.breakpoints.down("sm")]: {
-    padding: "36px 20px 0px",
-  },
-}));
-
-const Title = styled(Typography)({
-  fontSize: 15,
-  fontWeight: 800,
-  color: palette.text,
-  marginBottom: 10,
-  letterSpacing: 0.4,
-});
-
-const SmallText = styled(Typography)({
-  fontSize: 13,
-  color: "rgba(27,27,27,0.75)",
-  cursor: "pointer",
-  marginBottom: 4,
-  transition: "all 0.25s ease",
-  "&:hover": {
-    color: palette.terracotta,
-    transform: "translateX(2px)",
-  },
-});
 
 export const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
-  const loggedInUser = useSelector(selectLoggedInUser);
 
-  const addr = "2 rue Perdonnet, 75010 Paris";
-  const mail = "contact@ehr-batiment.fr";
-  const phone = "01 84 00 00 00";
+  const contact = {
+    address: "6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne",
+    mail: "contact@finipro.fr",
+    phone: "01 84 00 00 00",
+  };
+
+  const quickLinks = [
+    { label: "À propos", path: "/about" },
+    { label: "Nos Métiers", path: "/services" },
+    { label: "Réalisations", path: "/realisations" },
+    { label: "Devis & Contact", path: "/demanderDevis" },
+  ];
+
+  const columnStyles = {
+    borderRadius: 2,
+    p: 3,
+    minHeight: 160,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  };
 
   return (
-    <FooterWrap
+    <Box
       component={motion.footer}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* === MAIN FOOTER CONTENT === */}
-      <Grid container spacing={4} justifyContent="space-between">
-        {/* CONTACT */}
-        <Grid item xs={12} md={5}>
-          <Title>Discutons de votre projet</Title>
-
-
-          <Stack spacing={0.3} sx={{ mt: 1 }}>
-            <SmallText>📍 EHR SARL — {addr}</SmallText>
-            <SmallText>📧 {mail}</SmallText>
-            <SmallText>📞 {phone}</SmallText>
-          </Stack>
-        </Grid>
-
-        {/* QUICK LINKS */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Title>Liens rapides</Title>
-          <Stack spacing={0.3}>
-            <SmallText onClick={() => navigate("/about")}>À propos</SmallText>
-            <SmallText onClick={() => navigate("/services")}>Nos Métiers</SmallText>
-            <SmallText onClick={() => navigate("/demanderDevis")}>Contact</SmallText>
-          </Stack>
-        </Grid>
-
-        {/* PAYMENTS */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Title>Paiements sécurisés</Title>
-          <Stack direction="row" flexWrap="wrap" gap={1.5} sx={{ mt: 1 }}>
-            {[Visa, Mastercard, Amex, Applepay, Googlepay].map((Icon, i) => (
-              <Box
-                key={i}
-                component={motion.div}
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                sx={{
-                  bgcolor: "#fff",
-                  borderRadius: 2,
-                  boxShadow: "0 2px 8px rgba(27,27,27,0.08)",
-                  border: `1px solid ${palette.border}`,
-                  p: 0.6,
-                }}
-              >
-                <Icon style={{ width: 40, height: 28 }} />
-              </Box>
-            ))}
-          </Stack>
-        </Grid>
-      </Grid>
-
-      {/* SEPARATOR */}
-      <Divider sx={{ my: 3, borderColor: palette.border }} />
-
-      {/* BOTTOM BAR */}
       <Box
         sx={{
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
-          alignItems: "center",
+          overflow: "hidden",
+          mx: "auto",
+        }}
+      >
+        {/* Left Column: Slogan + Payments */}
+        <Box
+          sx={{
+            ...columnStyles,
+            backgroundColor: palette.olive,
+            color: "#fff",
+            clipPath: isMobile
+              ? "none"
+              : "polygon(0 0, 100% 0, 95% 100%, 0% 100%)",
+            flex: 1,
+            mb: isMobile ? 2 : 0,
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+              mb: 1,
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            Embellissez votre espace avec FINI PRO
+          </Typography>
+          <Stack direction="row" spacing={0.5} flexWrap="wrap">
+            {[Visa, Mastercard, Amex, Applepay, Googlepay].map((Icon, i) => (
+              <Box
+                key={i}
+                component={motion.div}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 1.5,
+                  boxShadow: "0 1px 5px rgba(0,0,0,0.08)",
+                  p: 0.4,
+                  mb: 1,
+                }}
+              >
+                <Icon style={{ width: 36, height: 24 }} />
+              </Box>
+            ))}
+          </Stack>
+        </Box>
+
+        {/* Center Column: Contact */}
+        <Box
+          sx={{
+            ...columnStyles,
+            backgroundColor: palette.stone,
+            color: palette.text,
+            clipPath: isMobile
+              ? "none"
+              : "polygon(5% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            flex: 1,
+            px: 4,
+            mb: isMobile ? 2 : 0,
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 700,
+              mb: 1.5,
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            Contactez-nous
+          </Typography>
+          <Stack spacing={0.5}>
+            <Typography
+              sx={{
+                fontSize: 13,
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+                "&:hover": { color: palette.olive, transition: "color 0.3s" },
+              }}
+            >
+              📍 {contact.address}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 13,
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+                "&:hover": { color: palette.olive, transition: "color 0.3s" },
+              }}
+            >
+              📧 {contact.mail}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 13,
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+                "&:hover": { color: palette.olive, transition: "color 0.3s" },
+              }}
+            >
+              📞 {contact.phone}
+            </Typography>
+          </Stack>
+        </Box>
+
+        {/* Right Column: Quick Links */}
+        <Box
+          sx={{
+            ...columnStyles,
+            backgroundColor: palette.darkOlive,
+            clipPath: isMobile
+              ? "none"
+              : "polygon(0 0, 100% 0, 100% 100%, 5% 100%)",
+            flex: 1,
+            px: 4,
+            color: "#fff",
+          }}
+        >
+          <Typography
+            sx={{
+              fontWeight: 700,
+              mb: 1.5,
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            Liens rapides
+          </Typography>
+          <Stack spacing={0.5}>
+            {quickLinks.map((link, i) => (
+              <Typography
+                key={i}
+                sx={{
+                  fontSize: 13,
+                  cursor: "pointer",
+                  fontFamily: "Inter, sans-serif",
+                  color: "#E6E8E6",
+                  "&:hover": { color: palette.olive, transition: "color 0.3s" },
+                }}
+                onClick={() => navigate(link.path)}
+              >
+                {link.label}
+              </Typography>
+            ))}
+          </Stack>
+        </Box>
+      </Box>
+
+      {/* Bottom Bar */}
+      <Box
+        sx={{
+          mt: 1,
+          py: 1,
+          borderTop: `1px solid rgba(0,0,0,0.08)`,
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "space-between",
-          py: 2,
-          borderTop: `1px solid ${palette.border}`,
+          alignItems: "center",
         }}
       >
         <Typography
           sx={{
-            fontSize: 13,
-            color: "rgba(27,27,27,0.6)",
+            fontSize: 12,
+            color: "rgba(31,31,31,0.6)",
             textAlign: isMobile ? "center" : "left",
+            fontFamily: "Inter, sans-serif",
           }}
         >
-          © EHR {new Date().getFullYear()} — Tous droits réservés.
+          © FINI PRO {new Date().getFullYear()} — Tous droits réservés.
         </Typography>
 
         <Stack
           direction="row"
-          spacing={3}
-          sx={{
-            mt: isMobile ? 1.5 : 0,
-            justifyContent: "center",
-          }}
+          spacing={2}
+          sx={{ mt: isMobile ? 1 : 0, justifyContent: "center" }}
         >
-          <SmallText onClick={() => navigate("/conditionsVentes")}>CGV</SmallText>
-          <SmallText onClick={() => navigate("/conditionsUtilisation")}>
+          <Typography
+            sx={{
+              fontSize: 12,
+              cursor: "pointer",
+              "&:hover": { color: palette.olive },
+            }}
+            onClick={() => navigate("/conditionsVentes")}
+          >
+            CGV
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 12,
+              cursor: "pointer",
+              "&:hover": { color: palette.olive },
+            }}
+            onClick={() => navigate("/conditionsUtilisation")}
+          >
             CGU & Mentions légales
-          </SmallText>
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 12,
+              cursor: "pointer",
+              "&:hover": { color: palette.olive },
+            }}
+            onClick={() => navigate("/politiquesConfidentialité")}
+          >
+            Politique de confidentialité
+          </Typography>
         </Stack>
       </Box>
-    </FooterWrap>
+    </Box>
   );
 };

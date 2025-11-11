@@ -1,181 +1,137 @@
-import React from "react";
-import { Box, Container, Typography, Grid, Card, CardMedia, CardContent } from "@mui/material";
-import { motion } from "framer-motion";
+// RealisationsBlock.jsx
+import React, { useState, useEffect } from "react";
+import { Box, Container, Typography, Stack } from "@mui/material";
+import { motion, AnimatePresence } from "framer-motion";
 import { bureaux, maisonIndiv, renovation } from "../../assets";
+import { LocationOn, Timer } from "@mui/icons-material";
 
-// 🟤 Palette cohérente avec le reste du site
 const palette = {
-    bronze: "#AD946B",
-    clay: "#B47E5D",
-    sand: "#FAF9F7",
-    text: "#2B2B2B",
+    darkGray: "#2B2B2B",
+    mediumGray: "#555555",
+    lightGray: "#F4F5F7",
     white: "#FFFFFF",
+    accent: "#4B6043", // subtle accent
 };
 
 export const RealisationsBlock = () => {
     const projects = [
         {
-            title: "Rénovation d’un immeuble haussmannien – Paris 10e",
-            client: "Copropriété privée",
-            duration: "6 mois",
-            works:
-                "Ravalement de façade, rénovation des communs, réfection complète des réseaux",
+            title: "Appartement parisien rénové – Paris 10e",
+            location: "Paris (75)",
+            duration: "5 jours",
             description:
-                "Un projet mené avec soin pour préserver l’élégance du patrimoine parisien tout en modernisant les performances énergétiques.",
+                "Reprise complète des murs et peinture haut de gamme. Pièce modernisée, murs lissés et teinte harmonieuse.",
             image: renovation,
         },
         {
-            title: "Extension et modernisation d’une maison individuelle – Montreuil",
-            client: "Particulier",
-            duration: "4 mois",
-            works:
-                "Agrandissement de 45 m², cuisine ouverte, menuiseries sur mesure",
+            title: "Local commercial modernisé – Lyon",
+            location: "Lyon (69)",
+            duration: "7 jours",
             description:
-                "Une rénovation lumineuse et contemporaine, où design et fonctionnalité s’allient parfaitement.",
-            image: maisonIndiv
+                "Pose de cloisons amovibles et sol PVC effet bois. Espace modulable et prêt à accueillir du public.",
+            image: bureaux,
         },
         {
-            title: "Aménagement de bureaux professionnels – Saint-Denis",
-            client: "Société de services",
-            duration: "3 mois",
-            works:
-                "Création d’espaces de travail collaboratifs, climatisation, câblage réseau",
+            title: "Maison rénovée – Toulouse",
+            location: "Toulouse (31)",
+            duration: "4 jours",
             description:
-                "Un environnement de travail moderne et ergonomique, pensé pour le confort et la productivité.",
-            image: bureaux
+                "Peinture façade et remise en état du jardin. Extérieur valorisé, finition durable et esthétique.",
+            image: maisonIndiv,
         },
     ];
 
-    const fadeUp = {
-        hidden: { opacity: 0, y: 40 },
-        visible: (i) => ({
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, delay: i * 0.15 },
-        }),
+    const [index, setIndex] = useState(0);
+
+    // Auto slide every 3 seconds
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIndex((prev) => (prev + 1) % projects.length);
+        }, 2000);
+        return () => clearInterval(timer);
+    }, [projects.length]);
+
+    const slideVariants = {
+        enter: { opacity: 0, x: 100 },
+        center: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -100 },
     };
 
     return (
-        <>
-            <Box
-                sx={{
-                    background: `linear-gradient(180deg, ${palette.sand} 0%, #F4F1EC 100%)`,
-                    minHeight: "100vh",
-                    py: { xs: 6, md: 10 },
-                }}
-            >
-                <Container maxWidth="lg">
-                    {/* HEADER */}
-                    <Box textAlign="center" mb={6}>
-                        <Typography
-                            variant="h3"
-                            fontWeight={800}
-                            color={palette.bronze}
-                            component={motion.h2}
-                            initial={{ opacity: 0, y: 25 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            Réalisations
-                        </Typography>
-                        <Typography
-                            variant="h6"
-                            sx={{ color: "rgba(43,43,43,0.75)", mt: 1 }}
-                            component={motion.p}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.4 }}
-                        >
-                            Quelques-unes de nos réalisations récentes
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                maxWidth: 750,
-                                mx: "auto",
-                                mt: 3,
-                                color: "rgba(43,43,43,0.7)",
-                                lineHeight: 1.7,
-                            }}
-                            component={motion.p}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                        >
-                            Chaque projet réalisé par EHR illustre notre engagement envers la
-                            qualité, la précision et la satisfaction de nos clients. Voici un
-                            aperçu de réalisations qui reflètent notre savoir-faire.
-                        </Typography>
-                    </Box>
+        <Box sx={{ background: palette.lightGray, py: { xs: 6, md: 10 } }}>
+            <Container maxWidth="lg">
+                {/* Header */}
+                <Box textAlign="center" mb={6}>
+                    <Typography variant="h3" fontWeight={800} color={palette.darkGray}>
+                        Nos Réalisations Récentes
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{ maxWidth: 700, mx: "auto", mt: 2, color: palette.mediumGray, lineHeight: 1.7 }}
+                    >
+                        Chaque projet reflète notre expertise et notre attention aux détails.
+                    </Typography>
+                </Box>
 
-                    {/* PROJECTS */}
-                    <Grid container spacing={5}>
-                        {projects.map((p, i) => (
-                            <Grid item xs={12} md={4} key={i}>
-                                <Card
-                                    component={motion.div}
-                                    custom={i}
-                                    variants={fadeUp}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    whileHover={{ y: -6 }}
-                                    transition={{ type: "spring", stiffness: 140 }}
+                {/* Carousel */}
+                <Box sx={{ position: "relative", height: { xs: 400, md: 450 }, overflow: "hidden" }}>
+                    <AnimatePresence>
+                        <motion.div
+                            key={index}
+                            variants={slideVariants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            transition={{ duration: 0.8 }}
+                            style={{
+                                position: "absolute",
+                                width: "100%",
+                                height: "100%",
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    height: "100%",
+                                    borderRadius: 3,
+                                    overflow: "hidden",
+                                    boxShadow: "0 12px 36px rgba(0,0,0,0.12)",
+                                    display: "flex",
+                                    flexDirection: { xs: "column", md: "row" },
+                                    backgroundColor: palette.white,
+                                }}
+                            >
+                                <Box
                                     sx={{
-                                        borderRadius: 3,
-                                        overflow: "hidden",
-                                        boxShadow: "0 8px 28px rgba(0,0,0,0.08)",
-                                        border: `1px solid ${palette.bronze}22`,
-                                        backgroundColor: palette.white,
-                                        height: "100%",
-                                        display: "flex",
-                                        flexDirection: "column",
+                                        flex: 1,
+                                        backgroundImage: `url(${projects[index].image})`,
+                                        backgroundSize: "cover",
+                                        backgroundPosition: "center",
+                                        minHeight: 220,
                                     }}
-                                >
-                                    <CardMedia
-                                        component="img"
-                                        image={p.image}
-                                        alt={p.title}
-                                        sx={{
-                                            height: 220,
-                                            objectFit: "cover",
-                                            filter: "brightness(0.92)",
-                                            transition: "0.4s",
-                                            "&:hover": { filter: "brightness(1)" },
-                                        }}
-                                    />
-                                    <CardContent sx={{ p: 3, flexGrow: 1 }}>
-                                        <Typography
-                                            variant="h6"
-                                            fontWeight={700}
-                                            sx={{ color: palette.bronze, mb: 1 }}
-                                        >
-                                            {p.title}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            <strong>Client :</strong> {p.client}
-                                            <br />
-                                            <strong>Durée :</strong> {p.duration}
-                                            <br />
-                                            <strong>Travaux :</strong> {p.works}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            sx={{
-                                                mt: 2,
-                                                color: "rgba(43,43,43,0.8)",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {p.description}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </Box>
-        </>
+                                />
+                                <Box sx={{ flex: 1, p: { xs: 3, md: 5 }, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                                    <Typography variant="h5" fontWeight={700} color={palette.darkGray} mb={2}>
+                                        {projects[index].title}
+                                    </Typography>
+                                    <Stack direction="row" spacing={3} mb={2}>
+                                        <Stack direction="row" spacing={0.5} alignItems="center">
+                                            <LocationOn sx={{ fontSize: 18, color: palette.accent }} />
+                                            <Typography variant="body2" color={palette.mediumGray}>{projects[index].location}</Typography>
+                                        </Stack>
+                                        <Stack direction="row" spacing={0.5} alignItems="center">
+                                            <Timer sx={{ fontSize: 18, color: palette.accent }} />
+                                            <Typography variant="body2" color={palette.mediumGray}>{projects[index].duration}</Typography>
+                                        </Stack>
+                                    </Stack>
+                                    <Typography variant="body1" sx={{ color: palette.darkGray, lineHeight: 1.6 }}>
+                                        {projects[index].description}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </motion.div>
+                    </AnimatePresence>
+                </Box>
+            </Container>
+        </Box>
     );
 };

@@ -1,58 +1,32 @@
+// ServicesBlock.jsx
 import React from "react";
-import {
-  Container,
-  Typography,
-  Paper,
-  Button,
-  Box,
-  Grid,
-  Stack,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Button, Container } from "@mui/material";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const palette = {
-  bronze: "#AD946B",
-  sand: "#ADA06B",
-  clay: "#AD846B",
-  text: "#2B2B2B",
-  bg: "linear-gradient(180deg, #FAF9F7 0%, #F6F3EF 100%)",
+  darkGray: "#2B2B2B",
+  mediumGray: "#555555",
+  lightGray: "#F4F5F7",
+  white: "#FFFFFF",
+  accent: "#4B6043",
 };
 
 const services = [
   {
-    icon: "🏗️",
-    title: "Travaux tous corps d’état",
-    description: [
-      "Réalisation complète de vos projets de construction ou rénovation, en coordonnant tous les corps de métier nécessaires.",
-      "• Gros œuvre : maçonnerie, structure, fondations",
-      "• Second œuvre : électricité, plomberie, menuiserie, peinture, plâtrerie",
-      "• Finitions et aménagements : sols, murs, mobilier intégré, éclairage",
-      "EHR garantit des chantiers réalisés dans les règles de l’art.",
-    ],
+    icon: "🛠️",
+    title: "Travaux de finition",
+    description: "Peinture, plâtrerie, sols et murs, nettoyage et remise en état. Intervention clé en main, finitions précises et durables.",
   },
   {
     icon: "🧱",
-    title: "Ingénierie & Pilotage",
-    description: [
-      "Nos ingénieurs assurent la coordination technique et administrative de vos projets.",
-      "• Études techniques et de faisabilité",
-      "• Plans d’exécution et modélisation",
-      "• Gestion du planning et du budget",
-      "• Suivi qualité et conformité",
-      "Chaque détail compte, du concept à la livraison.",
-    ],
+    title: "Plâtrerie & Cloisons",
+    description: "Faux plafonds, doublages, réfection des murs et enduits. Solutions modulables pour tous types de projets.",
   },
   {
-    icon: "🌿",
-    title: "Rénovation énergétique & durable",
-    description: [
-      "EHR s’engage pour un habitat plus responsable et performant.",
-      "• Isolation thermique et phonique",
-      "• Chauffage et ventilation éco-performants",
-      "• Matériaux durables et écologiques",
-      "Construire aujourd’hui, penser à demain.",
-    ],
+    icon: "🎨",
+    title: "Peinture & Décoration",
+    description: "Application décorative et façades, chantiers neufs et rénovations. Couleurs et finitions harmonisées pour vos espaces.",
   },
 ];
 
@@ -60,149 +34,118 @@ export const ServicesBlock = () => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ background: palette.bg, py: { xs: 6, md: 10 } }}>
+    <Box sx={{ background: palette.lightGray, py: { xs: 8, md: 12 }, overflow: "hidden" }}>
       <Container maxWidth="lg">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <Box textAlign="center" mb={10}>
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <Typography variant="h3" fontWeight={900} color={palette.darkGray}>
+              Nos Métiers
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ color: palette.mediumGray, mt: 2 }}
+            >
+              Des savoir-faire complémentaires pour vos projets d’excellence
+            </Typography>
+          </motion.div>
+        </Box>
+
+        {/* Creative diagonal cards */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: 6,
+            overflowX: { xs: "auto", md: "visible" },
+            px: { xs: 2, md: 0 },
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
         >
-          <Typography
-            variant="h3"
-            fontWeight={900}
-            textAlign="center"
-            sx={{
-              color: palette.text,
-              mb: 1,
-              letterSpacing: 0.4,
-            }}
-          >
-            Nos Métiers
-          </Typography>
-          <Typography
-            variant="h6"
-            textAlign="center"
-            sx={{
-              color: "rgba(43,43,43,0.7)",
-              mb: 10,
-            }}
-          >
-            Des savoir-faire complémentaires pour vos projets d’excellence
-          </Typography>
-        </motion.div>
-
-        {/* Service Cards */}
-        <Stack spacing={8}>
-          {services.map((service, i) => {
-            const reverse = i % 2 !== 0;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: i * 0.1 }}
-                viewport={{ once: true }}
+          {services.map((service, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: i * 0.2 }}
+              whileHover={{ scale: 1.03 }}
+              style={{
+                minWidth: 300,
+                maxWidth: 360,
+                flex: "0 0 auto",
+                transform: i % 2 === 0 ? "rotate(-2deg)" : "rotate(2deg)",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: palette.white,
+                  borderRadius: 3,
+                  px: 4,
+                  py: 6,
+                  textAlign: "center",
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+                  position: "relative",
+                  overflow: "visible",
+                }}
               >
-                <Grid
-                  container
-                  spacing={4}
-                  direction={reverse ? "row-reverse" : "row"}
-                  alignItems="center"
+                <Box
+                  sx={{
+                    fontSize: 60,
+                    mb: 3,
+                    color: palette.accent,
+                  }}
                 >
-                  {/* Left visual block */}
-                  <Grid item xs={12} md={5}>
-                    <Box
-                      sx={{
-                        background: `linear-gradient(135deg, ${palette.bronze} 0%, ${palette.sand} 100%)`,
-                        borderRadius: 4,
-                        height: 260,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#fff",
-                        fontSize: 64,
-                        boxShadow: "0 10px 30px rgba(173,148,107,0.25)",
-                        transform: reverse ? "rotate(2deg)" : "rotate(-2deg)",
-                      }}
-                    >
-                      {service.icon}
-                    </Box>
-                  </Grid>
-
-                  {/* Text block */}
-                  <Grid item xs={12} md={7}>
-                    <Paper
-                      component={motion.div}
-                      whileHover={{
-                        scale: 1.02,
-                        boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-                      }}
-                      sx={{
-                        p: { xs: 3, md: 5 },
-                        borderRadius: 3,
-                        backgroundColor: "#fff",
-                        border: `1px solid ${palette.bronze}33`,
-                        transition: "all 0.3s ease",
-                      }}
-                    >
-                      <Typography
-                        variant="h5"
-                        fontWeight={800}
-                        gutterBottom
-                        sx={{
-                          color: palette.bronze,
-                          mb: 2,
-                          letterSpacing: 0.3,
-                        }}
-                      >
-                        {service.title}
-                      </Typography>
-                      {service.description.map((d, j) => (
-                        <Typography
-                          key={j}
-                          variant="body1"
-                          sx={{
-                            color: "rgba(43,43,43,0.85)",
-                            mb: 1,
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          {d}
-                        </Typography>
-                      ))}
-                    </Paper>
-                  </Grid>
-                </Grid>
-              </motion.div>
-            );
-          })}
-        </Stack>
+                  {service.icon}
+                </Box>
+                <Typography variant="h5" fontWeight={700} mb={2} color={palette.darkGray}>
+                  {service.title}
+                </Typography>
+                <Typography variant="body1" color={palette.mediumGray} lineHeight={1.6}>
+                  {service.description}
+                </Typography>
+                {/* Decorative floating circle */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    width: 100,
+                    height: 100,
+                    borderRadius: "50%",
+                    background: `${palette.accent}22`,
+                    top: -30,
+                    right: -30,
+                    zIndex: 0,
+                  }}
+                />
+              </Box>
+            </motion.div>
+          ))}
+        </Box>
 
         {/* CTA */}
         <Box textAlign="center" mt={12}>
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
             <Button
               variant="contained"
               onClick={() => navigate("/demanderDevis")}
               sx={{
-                background: `linear-gradient(90deg, ${palette.bronze}, ${palette.clay})`,
-                color: "#fff",
+                backgroundColor: palette.accent,
+                color: palette.white,
                 px: 6,
                 py: 1.6,
                 fontWeight: 700,
-                borderRadius: 2,
+                borderRadius: 3,
                 fontSize: 16,
-                boxShadow: "0 8px 22px rgba(173,148,107,0.4)",
-                "&:hover": {
-                  background: `linear-gradient(90deg, ${palette.clay}, ${palette.sand})`,
-                  boxShadow: "0 10px 26px rgba(173,132,107,0.45)",
-                },
+                boxShadow: "0 10px 30px rgba(75,96,67,0.3)",
+                "&:hover": { backgroundColor: palette.darkGray, boxShadow: "0 12px 36px rgba(43,43,43,0.35)" },
               }}
             >
               Demander un devis
