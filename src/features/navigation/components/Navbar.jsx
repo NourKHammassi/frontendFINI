@@ -39,7 +39,7 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: "Accueil", to: "/" },
-    { name: "Nos Métiers", to: "/services" },
+    { name: "Services", to: "/services" },
     { name: "Réalisations", to: "/realisations" },
   ];
 

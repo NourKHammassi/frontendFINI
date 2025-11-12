@@ -15,7 +15,7 @@ export const ConditionsGeneralesUtilisations = () => {
   const cguSections = [
     {
       title: "Article 1 – Objet",
-      content: `Les présentes CGU définissent les modalités d’accès et d’utilisation du site www.finipro.fr (ci-après “le Site”), édité par FINI PRO – RAGUED Saif Allah.`,
+      content: `Les présentes CGU définissent les modalités d’accès et d’utilisation du site ${process.env.REACT_APP_BASE_SITE}, édité par FINI PRO – RAGUED Saif Allah.`,
     },
     {
       title: "Article 2 – Acceptation des CGU",
@@ -32,7 +32,7 @@ export const ConditionsGeneralesUtilisations = () => {
     {
       title: "Article 5 – Données personnelles",
       content: `Les données personnelles collectées via le Site sont traitées conformément au RGPD. Vous pouvez exercer vos droits (accès, rectification, suppression, opposition) à :
-📧 ${process.env.REACT_APP_EMAIL}`,
+📧 ${process.env.REACT_APP_BASE_MAIL}`,
     },
     {
       title: "Article 6 – Responsabilité",
@@ -54,7 +54,7 @@ export const ConditionsGeneralesUtilisations = () => {
       content: `FINI PRO – RAGUED Saif Allah  
 Forme : Entrepreneur Individuel  
 SIREN : 944 924 273  
-Adresse : 6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne  
+Adresse : ${process.env.REACT_APP_BASE_ADRESS}  
 Activité : Travaux de finition (APE 43.39Z)`,
     },
     {
@@ -65,8 +65,8 @@ Adresse : 61 Lordou Vironos Street, 6023 Larnaca, Chypre
     },
     {
       title: "Contact",
-      content: `📧 ${process.env.REACT_APP_EMAIL}  
-📞 ${process.env.REACT_APP_PHONE_NUMBER}`,
+      content: `📧 ${process.env.REACT_APP_BASE_MAIL}  
+📞 ${process.env.REACT_APP_BASE_NUMBER}`,
     },
   ];
 

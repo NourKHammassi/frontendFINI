@@ -256,9 +256,9 @@ export const DevisForm = () => {
         </Typography>
         <Typography variant="body2" textAlign="center" sx={{ color: palette.textLight, mb: 6 }}>
           Raison sociale : RAGUED Saif Allah (EI) – FINI PRO<br />
-          Adresse : 6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne<br />
-          Téléphone : {process.env.REACT_APP_PHONE_NUMBER}<br />
-          Email : {process.env.REACT_APP_EMAIL}<br />
+          Adresse : {process.env.REACT_APP_BASE_ADRESS}<br />
+          Téléphone : {process.env.REACT_APP_BASE_NUMBER}<br />
+          Email : {process.env.REACT_APP_BASE_MAIL}<br />
           RCS : 944 924 273 R.C.S. Créteil
         </Typography>
       </Box>

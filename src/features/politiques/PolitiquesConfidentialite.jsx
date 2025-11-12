@@ -47,7 +47,7 @@ Passé ces délais, vos données sont supprimées ou archivées en toute sécuri
 - Droit à la limitation ou à la portabilité des données
 
 Pour exercer vos droits, contactez-nous à :
-📧 ${process.env.REACT_APP_EMAIL || "contact@finipro.fr"}`,
+📧 ${process.env.REACT_APP_BASE_MAIL}`,
     },
     {
       title: "🔐 Sécurité des données",
@@ -65,8 +65,8 @@ Aucune donnée n’est transmise à des tiers à des fins commerciales.`,
     {
       title: "📩 Contact",
       content: `Pour toute question relative à la protection de vos données personnelles :
-📧 ${process.env.REACT_APP_EMAIL || "contact@finipro.fr"}
-📮 FINI PRO – 6 Place Robert Belvaux, 94170 Le Perreux-sur-Marne, France`,
+📧 ${process.env.REACT_APP_BASE_MAIL}
+📮 ${process.env.REACT_APP_BASE_ADRESS}`,
     },
   ];
 

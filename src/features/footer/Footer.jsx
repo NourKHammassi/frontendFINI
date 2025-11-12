@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Visa, Mastercard, Amex, Applepay, Googlepay } from "react-pay-icons";
 
 const palette = {
-  olive: "#4B6043",
+  olive: "#6a875f",
   darkOlive: "#556E51",
   stone: "#E6E8E6",
   text: "#1F1F1F",
@@ -130,7 +130,7 @@ export const Footer = () => {
                 "&:hover": { color: palette.olive, transition: "color 0.3s" },
               }}
             >
-              📍 {contact.address}
+              📍 {process.env.REACT_APP_BASE_ADRESS}
             </Typography>
             <Typography
               sx={{
@@ -140,7 +140,7 @@ export const Footer = () => {
                 "&:hover": { color: palette.olive, transition: "color 0.3s" },
               }}
             >
-              📧 {contact.mail}
+              📧 {process.env.REACT_APP_BASE_MAIL}
             </Typography>
             <Typography
               sx={{
@@ -150,7 +150,7 @@ export const Footer = () => {
                 "&:hover": { color: palette.olive, transition: "color 0.3s" },
               }}
             >
-              📞 {contact.phone}
+              📞 {process.env.REACT_APP_BASE_NUMBER}
             </Typography>
           </Stack>
         </Box>
@@ -200,6 +200,8 @@ export const Footer = () => {
       {/* Bottom Bar */}
       <Box
         sx={{
+          mr: 2,
+          ml: 2,
           mt: 1,
           py: 1,
           borderTop: `1px solid rgba(0,0,0,0.08)`,
