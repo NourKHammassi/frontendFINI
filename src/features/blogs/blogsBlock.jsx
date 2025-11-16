@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { suiviChantierrr } from "../../assets";
+// import { suiviChantierrr } from "../../assets";
 
 const palette = {
   bronze: "#AD946B",
@@ -52,8 +52,8 @@ export const BlogsBlock = () => {
     },
     {
       id: 3,
-      image:
-        suiviChantierrr,
+      // image:
+      //   suiviChantierrr,
       text: `Plongez dans les coulisses de nos projets : avant / après, coulées de béton, 
       finitions design, innovations techniques… 
       Chaque réalisation raconte une histoire, celle de la transformation réussie d’un espace.`,

@@ -24,7 +24,7 @@ import {
   clearForgotPasswordSuccessMessage,
   resetForgotPasswordStatus,
 } from "../AuthSlice";
-import { forgot } from "../../../assets";
+// import { forgot } from "../../../assets";
 
 const palette = {
   bronze: "#AD946B",
@@ -109,7 +109,7 @@ export const ForgotPassword = () => {
             }}
           >
             <img
-              src={forgot}
+              // src={forgot}
               alt="Livreur triste"
               style={{
                 width: "100%",

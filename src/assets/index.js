@@ -11,45 +11,49 @@ import facebookPng from "./images/facebook.png";
 import twitterPng from "./images/twitter.png";
 import instagramPng from "./images/instagram.png";
 import linkedinPng from "./images/linkedin.png";
-import login from "./images/loginAvatar.jpg";
 import loadingAnimation from "./animations/loading.json";
-import architecture from "./images/architecture.jpg";
+
+
+import architecte from "./images/architecte.jpg";
+import carrelage from "./images/carrelage.jpg";
+import Dinterier from "./images/3Dinterier.jpg";
+import appartRenovation from "./images/appartRenovation.jpg";
 import construction from "./images/construction.jpg";
-import electricity from "./images/electricity.jpg";
-import engenier from "./images/engenier.jpg";
-import plann from "./images/plann.jpg";
-import planning from "./images/planning.jpg";
-import solar from "./images/solar.jpg";
-import worker from "./images/worker.jpg";
-import worker1 from "./images/worker1.jpg";
-import worker2 from "./images/worker2.jpg";
-import workers from "./images/workers.jpg";
-import bureaux from "./images/bureaux.jpg";
-import maisonIndiv from "./images/maisonIndiv.jpg";
-import renovation from "./images/renovation.jpg";
-import devisB2B from "./images/devisB2B.jpg";
-import suiviChantier from "./images/suiviChantier.jpg";
-import suiviChantierrr from "./images/suiviChantierrr.jpg";
-import forgot from "./images/forgot.jpg";
+import discuPlan from "./images/discuPlan.jpg";
+import interieuSol from "./images/interieurSol.jpg";
+import mesureBois from "./images/mesureBois.jpg";
+import mesures from "./images/mesures.jpg";
+import nettoyageChantier from "./images/nettoyageChantier.jpg";
+import peinture from "./images/peinture.jpg";
+import peintureMateriel from "./images/peintureMateriel.jpg";
+import peintureOrange from "./images/peintureOrange.jpg";
+import planTravail from "./images/planTravail.jpg";
+import projetArchitectural from "./images/projetArchitectural.jpg";
+import renovationSol from "./images/renovationSol.jpg";
+import solPrecision from "./images/solPrecision.jpg";
+import trorroir from "./images/trottoir-en-bois.jpg";
+import vueLateraleProjet from "./images/vueLateraleProjet.jpg";
+
 export {
-  architecture,
-  forgot,
-  devisB2B,
-  suiviChantier,
-  bureaux,
-  maisonIndiv,
-  suiviChantierrr,
-  renovation,
+  vueLateraleProjet,
+  trorroir,
+  solPrecision,
+  renovationSol,
+  projetArchitectural,
+  planTravail,
+  peintureOrange,
+  peintureMateriel,
+  peinture,
+  mesures,
+  nettoyageChantier,
+  mesureBois,
+  interieuSol,
+  discuPlan,
   construction,
-  electricity,
-  engenier,
-  plann,
-  planning,
-  solar,
-  worker,
-  worker1,
-  worker2,
-  workers,
+  appartRenovation,
+  Dinterier,
+  carrelage,
+  architecte,
   ecommerceOutlookAnimation,
   shoppingBagAnimation,
   orderSuccessAnimation,
@@ -64,7 +68,6 @@ export {
   instagramPng,
   linkedinPng,
   loadingAnimation,
-  login
 };
 
 export const VanIcon = () => (

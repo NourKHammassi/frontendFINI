@@ -81,7 +81,7 @@ export const DevisForm = () => {
             textAlign="center"
             sx={{ color: palette.primary, mb: 2, letterSpacing: 1 }}
           >
-            📞 Contactez FINI PRO pour un devis personnalisé
+            Contactez FINI PRO pour un devis personnalisé
           </Typography>
 
           <Typography
@@ -99,7 +99,7 @@ export const DevisForm = () => {
             textAlign="center"
             sx={{ color: palette.secondary, mb: 3 }}
           >
-            🛠️ Demande de devis ou informations
+            Demande de devis ou informations
           </Typography>
 
           <Typography
@@ -206,7 +206,7 @@ export const DevisForm = () => {
                   render={({ field }) => <Checkbox {...field} />}
                 />
               }
-              label="✅ J’accepte que mes données soient utilisées uniquement pour le traitement de ma demande, conformément à la politique de confidentialité de FINI PRO."
+              label="J’accepte que mes données soient utilisées uniquement pour le traitement de ma demande, conformément à la politique de confidentialité de FINI PRO."
             />
 
             <Button
@@ -231,7 +231,7 @@ export const DevisForm = () => {
               textAlign="center"
               sx={{ color: palette.textLight, mb: 6, fontStyle: "italic" }}
             >
-              ⚠️ Toute intervention ne peut être planifiée qu’après validation formelle du devis envoyé par FINI PRO.
+              Toute intervention ne peut être planifiée qu’après validation formelle du devis envoyé par FINI PRO.
             </Typography>
           </Stack>
 
@@ -252,7 +252,7 @@ export const DevisForm = () => {
           textAlign="center"
           sx={{ color: palette.primary, mb: 2 }}
         >
-          🏢 Coordonnées FINI PRO
+          Coordonnées FINI PRO
         </Typography>
         <Typography variant="body2" textAlign="center" sx={{ color: palette.textLight, mb: 6 }}>
           Raison sociale : RAGUED Saif Allah (EI) – FINI PRO<br />

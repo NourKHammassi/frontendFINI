@@ -35,7 +35,7 @@ export const theme = createTheme({
   },
 
   typography: {
-    fontFamily: ["Inter", "Lora", "Segoe UI", "sans-serif"].join(","),
+    // fontFamily: ["Inter", "Lora", "Segoe UI", "sans-serif"].join(","),
 
     h1: {
       fontSize: "5rem",
@@ -117,7 +117,7 @@ export const theme = createTheme({
         root: {
           borderRadius: "12px",
           padding: "12px 28px",
-          fontFamily: "Inter, sans-serif",
+          // fontFamily: "Inter, sans-serif",
           fontWeight: 700,
           textTransform: "uppercase",
           transition: "all 0.25s ease",

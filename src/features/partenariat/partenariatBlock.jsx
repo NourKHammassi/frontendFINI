@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { devisB2B, suiviChantier } from "../../assets";
+// import { devisB2B, suiviChantier } from "../../assets";
 
 const palette = {
     bronze: "#AD946B",
@@ -39,13 +39,13 @@ export const PartenariatBlock = () => {
         },
         {
             title: "Devis B2B rapides et transparents",
-            image:
-                devisB2B
+            // image:
+            //     devisB2B
         },
         {
             title: "Gestion technique et suivi de chantier",
-            image:
-                suiviChantier
+            // image:
+            //     suiviChantier
         },
         {
             title: "Documentation technique et attestations sur demande",

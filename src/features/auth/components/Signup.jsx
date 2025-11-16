@@ -22,7 +22,7 @@ import {
   resetSignupStatus,
 } from "../AuthSlice";
 import { toast } from "react-toastify";
-import { login } from "../../../assets";
+// import { login } from "../../../assets";
 
 const palette = {
   olive: "#4B6043",
@@ -121,7 +121,7 @@ export const Signup = () => {
         {!isMobile && (
           <Box flex={1} display="flex" justifyContent="center" alignItems="center">
             <img
-              src={login}
+              // src={login}
               alt="FINI PRO"
               style={{
                 width: "100%",
