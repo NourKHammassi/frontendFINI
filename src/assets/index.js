@@ -34,7 +34,17 @@ import solPrecision from "./images/solPrecision.jpg";
 import trorroir from "./images/trottoir-en-bois.jpg";
 import vueLateraleProjet from "./images/vueLateraleProjet.jpg";
 
+
+import forgotPass from "./images/forgotPass.png";
+import login from "./images/login.png";
+import signup from "./images/signup.png";
+import logo from "./images/logo.png";
+
 export {
+  forgotPass,
+  login,
+  signup,
+  logo,
   vueLateraleProjet,
   trorroir,
   solPrecision,

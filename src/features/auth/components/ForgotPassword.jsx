@@ -7,7 +7,6 @@ import {
   FormHelperText,
   useMediaQuery,
   useTheme,
-  Paper,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
@@ -24,14 +23,15 @@ import {
   clearForgotPasswordSuccessMessage,
   resetForgotPasswordStatus,
 } from "../AuthSlice";
-// import { forgot } from "../../../assets";
+import { forgotPass } from "../../../assets";
 
+// ✅ Original palette
 const palette = {
-  bronze: "#AD946B",
-  clay: "#B47E5D",
-  sand: "#FAF9F7",
-  blue: "#0F3F80",
-  text: "#2B2B2B",
+  olive: "#4B6043",
+  darkOlive: "#556E51",
+  stone: "#F0F1EB",
+  text: "#1F1F1F",
+  white: "#FFFFFF",
 };
 
 export const ForgotPassword = () => {
@@ -69,93 +69,60 @@ export const ForgotPassword = () => {
   return (
     <Box
       sx={{
-        background: `linear-gradient(180deg, ${palette.sand} 0%, #F4F1EC 100%)`,
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         px: 2,
         py: 6,
+        background: palette.stone,
       }}
     >
-      <Paper
+      <GlassPaper
         component={motion.div}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: "center",
-          maxWidth: 900,
-          width: "100%",
-          borderRadius: 4,
-          boxShadow: "0 10px 40px rgba(173,148,107,0.25)",
-          overflow: "hidden",
-          backgroundColor: "#fff",
-        }}
       >
-        {/* Image */}
         {!isMobile && (
           <Box
             flex={1}
             display="flex"
             justifyContent="center"
             alignItems="center"
-            sx={{
-              background: `linear-gradient(135deg, ${palette.bronze}22, ${palette.clay}11)`,
-              height: "100%",
-              py: 6,
-            }}
+            sx={{ height: "100%", py: 6 }}
           >
-            <img
-              // src={forgot}
-              alt="Livreur triste"
+            <motion.img
+              src={forgotPass}
+              alt="Forgot password"
+              initial={{ scale: 0.95, opacity: 0.8 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
               style={{
                 width: "100%",
                 maxWidth: 360,
                 borderRadius: "15px",
                 objectFit: "contain",
+                boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
               }}
             />
           </Box>
         )}
 
-        {/* Formulaire */}
-        <Box
-          flex={1}
-          p={{ xs: 4, md: 6 }}
-          sx={{
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
+        <Box flex={1} p={{ xs: 4, md: 6 }} sx={{ width: "100%", textAlign: "center" }}>
           <Typography
             variant="h4"
             fontWeight={800}
-            sx={{
-              color: palette.bronze,
-              mb: 2,
-              letterSpacing: 0.5,
-            }}
+            sx={{ color: palette.olive, mb: 2, letterSpacing: 0.5 }}
           >
             Mot de passe oublié ?
           </Typography>
-          <Typography
-            variant="body1"
-            color="rgba(43,43,43,0.7)"
-            mb={4}
-            sx={{ lineHeight: 1.7 }}
-          >
-            Pas de panique ! Saisissez votre adresse e-mail ci-dessous, et nous
-            vous enverrons un lien pour réinitialiser votre mot de passe.
+          <Typography variant="body1" color={palette.text} mb={4} sx={{ lineHeight: 1.7 }}>
+            Pas de panique ! Saisissez votre adresse e-mail ci-dessous, et nous vous enverrons
+            un lien pour réinitialiser votre mot de passe.
           </Typography>
 
-          <Stack
-            component="form"
-            spacing={3}
-            onSubmit={handleSubmit(handleForgotPassword)}
-          >
+          <Stack component="form" spacing={3} onSubmit={handleSubmit(handleForgotPassword)}>
             <TextField
               fullWidth
               placeholder="Entrez votre adresse e-mail"
@@ -166,10 +133,14 @@ export const ForgotPassword = () => {
                   message: "Adresse e-mail invalide",
                 },
               })}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backdropFilter: "blur(8px)",
+                  backgroundColor: "rgba(255,255,255,0.25)",
+                },
+              }}
             />
-            {errors.email && (
-              <FormHelperText error>{errors.email.message}</FormHelperText>
-            )}
+            {errors.email && <FormHelperText error>{errors.email.message}</FormHelperText>}
 
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <LoadingButton
@@ -180,17 +151,17 @@ export const ForgotPassword = () => {
                 sx={{
                   py: 1.5,
                   fontWeight: 600,
-                  background: `linear-gradient(90deg, ${palette.bronze}, ${palette.clay})`,
-                  color: "white",
-                  borderRadius: 2,
-                  boxShadow: "0 8px 22px rgba(173,148,107,0.4)",
+                  borderRadius: 3,
+                  background: `linear-gradient(90deg, ${palette.olive}, ${palette.darkOlive})`,
+                  color: palette.white,
+                  boxShadow: "0 8px 20px rgba(75,96,67,0.35)",
                   "&:hover": {
-                    background: `linear-gradient(90deg, ${palette.clay}, ${palette.bronze})`,
-                    boxShadow: "0 10px 26px rgba(173,132,107,0.45)",
+                    background: `linear-gradient(90deg, ${palette.darkOlive}, ${palette.olive})`,
+                    boxShadow: "0 10px 26px rgba(75,96,67,0.45)",
                   },
                 }}
               >
-                Envoyer le lien de réinitialisation
+                Envoyer le lien
               </LoadingButton>
             </motion.div>
           </Stack>
@@ -201,7 +172,7 @@ export const ForgotPassword = () => {
             sx={{
               display: "inline-block",
               mt: 3,
-              color: palette.bronze,
+              color: palette.olive,
               textDecoration: "none",
               fontWeight: 600,
               "&:hover": { textDecoration: "underline" },
@@ -210,7 +181,29 @@ export const ForgotPassword = () => {
             ← Retour à la connexion
           </Typography>
         </Box>
-      </Paper>
+      </GlassPaper>
     </Box>
   );
 };
+
+const GlassPaper = (props) => (
+  <motion.div
+    {...props}
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      maxWidth: 900,
+      width: "100%",
+      borderRadius: "2rem",
+      overflow: "hidden",
+      backdropFilter: "blur(15px)",
+      backgroundColor: "rgba(255,255,255,0.15)",
+      boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
+      zIndex: 1,
+      position: "relative",
+    }}
+  >
+    {props.children}
+  </motion.div>
+);
